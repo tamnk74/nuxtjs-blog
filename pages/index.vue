@@ -3,11 +3,8 @@
     <div>
       <logo />
       <h1 class="title">
-        nuxt-app
+        A simple blog by Nuxt js
       </h1>
-      <h2 class="subtitle">
-        Sample-App
-      </h2>
       <div class="links">
         <a
           href="https://nuxtjs.org/"

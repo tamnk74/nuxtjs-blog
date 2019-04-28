@@ -1,5 +1,4 @@
 import { mapActions } from 'vuex';
-import constants from '@/constants';
 
 export default {
   name: 'Login',
@@ -13,8 +12,8 @@ export default {
     return {
       error: false,
       click_login: false,
-      email: 'tamnk74@gmail.com',
-      password: '123!@#',
+      email: '',
+      password: '',
     }
   },
   created() {
@@ -30,10 +29,11 @@ export default {
     ]),
 
     /**
-     * Function go to Back page
+     * Check an email is valid or not
      */
-    back() {
-      this.$router.go(-1);
+    isValidEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
     },
 
     /**
@@ -44,12 +44,12 @@ export default {
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
+          debugger;
           this.$nuxt.$loading.start();
           // Get user input
-          let user = {
-            email: this.email,
+          let user = Object.assign({
             password: this.password,
-          };
+          }, this.isValidEmail(this.email) ? { email: this.email } : { name: this.email });
           this.error = false;
           this.clickLogin = true;
           // Call function login to Login

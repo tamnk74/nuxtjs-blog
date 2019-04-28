@@ -98,3 +98,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.navbar-collapse {
+  margin-bottom: 0px;
+}
+</style>

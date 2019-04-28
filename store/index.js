@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import posts from './modules/posts';
 import auth from './modules/auth';
 import VueNotifications from 'vue-notifications'
+import { debug } from 'util';
 
 Vue.use(Vuex);
 
@@ -27,11 +28,11 @@ const createStore = () => {
 				state.error = error;
 				if (!error.response) {
 					VueNotifications.error({message: error.message})
-				} 
+				}
 				else {
 					VueNotifications.error({
 						title: error.response.status + ' ' + error.response.statusText,
-						message: error.response.data && error.response.data.error.message
+						message: error.response.data.error && error.response.data.error.message
 					});
 				}
 				setLoading(state, false);

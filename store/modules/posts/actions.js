@@ -17,6 +17,7 @@ export const getPostList = ({ commit }, data) => {
     })
     .catch(e => {
       commit("setLoading", false, { root: true });
+      commit("notifyError", error, { root: true });
       reject(e);
     });
   });
@@ -34,6 +35,7 @@ export const createPost = ({ commit }, data) => {
     })
     .catch(e => {
       commit("setLoading", false, { root: true });
+      commit("notifyError", error, { root: true });
       reject(e);
     });
   });

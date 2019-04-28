@@ -1,22 +1,22 @@
 <template>
   <div class="container">
-      <div class="panel panel-default width-100">
+      <div class="panel panel panel-success">
           <div class="panel-heading">Login</div>
           <div class="panel-body">
               <form class="form-horizontal" role="form">
                   <div class="form-group">
-                      <label for="email" class="col-md-4 control-label">E-Mail</label>
+                      <label for="email" class="col-md-3 control-label">E-Mail</label>
                       <div class="col-md-6">
                         <input type="text" name="email" class="form-control" v-validate="'required'" v-model="email" data-vv-as="Email or Username">
-                        <small v-if="errors.has('email')" class="field-text is-danger">{{ errors.first('email') }}</small>
+                        <div v-if="errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
                       </div>
                   </div>
 
                   <div class="form-group">
-                      <label for="password" class="col-md-4 control-label">Password</label>
+                      <label for="password" class="col-md-3 control-label">Password</label>
                       <div class="col-md-6">
                         <input type="password" name="password" class="form-control" v-validate="'required'" v-model="password" autocomplete="on" data-vv-as="Password">
-                        <span>{{ errors.first('password') }}</span>
+                        <div v-if="errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
                       </div>
                   </div>
 
@@ -33,9 +33,3 @@
 </template>
 
 <script src="@@/business/login/LoginBusiness.js"></script>
-
-<style scoped>
-.width-100 {
-  width: 100%
-}
-</style>
