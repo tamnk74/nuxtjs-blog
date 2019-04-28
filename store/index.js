@@ -30,7 +30,7 @@ const createStore = () => {
 				} 
 				else {
 					VueNotifications.error({
-						title: error.response.status + error.response.statusText,
+						title: error.response.status + ' ' + error.response.statusText,
 						message: error.response.data && error.response.data.error.message
 					});
 				}

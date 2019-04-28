@@ -19,7 +19,7 @@
         <nuxt-link to="/" class="navbar-brand">Blog</nuxt-link>
       </div>
 
-      <div class="collapse navbar-collapse" id="app-navbar-collapse">
+      <ul class="collapse navbar-collapse" id="app-navbar-collapse">
         <!-- Left Side Of Navbar -->
         <ul class="nav navbar-nav">
           <li class>
@@ -48,26 +48,26 @@
         <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right">
           <!-- Authentication Links -->
-          <li v-if="authenticated" class="nav-item dropdown">
+          <li v-if="authenticated" class="dropdown">
             <a
-              class="nav-link dropdown-toggle"
+              class="dropdown-toggle"
               id="navbarDropdownMenuLink"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-            >{{ getName }}</a>
-            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-              <nuxt-link to="/profile" class="dropdown-item">Profile</nuxt-link>
-              <nuxt-link to="/posts/create" class="dropdown-item">New post</nuxt-link>
-              <nuxt-link to="/my-post" class="dropdown-item">My post</nuxt-link>
-              <a class="dropdown-item" href="#" @click="logout">Logout</a>
-            </div>
+            >{{ getName }}<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><nuxt-link to="/profile" class="dropdown-item">Profile</nuxt-link></li>
+              <li><nuxt-link to="/posts/create" class="dropdown-item">New post</nuxt-link></li>
+              <li><nuxt-link to="/my-post" class="dropdown-item">My post</nuxt-link></li>
+              <li><a class="dropdown-item" href="#" @click="logout">Logout</a></li>
+            </ul>
           </li>
           <li v-else class="nav-item">
             <nuxt-link to="/login" class="nav-link">Login</nuxt-link>
           </li>
         </ul>
-      </div>
+      </ul>
     </div>
   </nav>
 </template>
