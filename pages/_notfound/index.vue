@@ -8,4 +8,3 @@
 </template>
 
 <script  src="@/business/_notfound/NotFoundBusiness.js"></script>
-

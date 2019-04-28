@@ -5,7 +5,8 @@ import {get, post} from '@/plugins/api';
 export default {
   validate ({ params }) {
     // Must be a number
-    return true; // /^\d+$/.test(params.id)
+    const v4 = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
+    return v4.test(params.id);
   },
   data() {
     return {
