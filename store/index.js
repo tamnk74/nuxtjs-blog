@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import posts from './modules/posts';
+import categories from './modules/categories';
 import auth from './modules/auth';
 import VueNotifications from 'vue-notifications'
-import { debug } from 'util';
 
 Vue.use(Vuex);
 
@@ -11,8 +11,9 @@ const createStore = () => {
 	return new Vuex.Store({
 		// Assign the modules to the store
 		modules: {
+			auth,
 			posts,
-			auth
+			categories,
 		},
 		// #root state
 		state: () => ({

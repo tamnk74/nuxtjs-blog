@@ -59,6 +59,7 @@
             <ul class="dropdown-menu" role="menu">
               <li><nuxt-link to="/profile" class="dropdown-item">Profile</nuxt-link></li>
               <li><nuxt-link to="/posts/create" class="dropdown-item">New post</nuxt-link></li>
+              <li><nuxt-link to="/categories/create" class="dropdown-item">New Category</nuxt-link></li>
               <li><nuxt-link to="/my-post" class="dropdown-item">My post</nuxt-link></li>
               <li><a class="dropdown-item" href="#" @click="logout">Logout</a></li>
             </ul>

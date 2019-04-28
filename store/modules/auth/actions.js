@@ -15,10 +15,7 @@ export const login = ({ commit }, data) => {
 
   return new Promise((resolve, reject) => {
     // Post data to API by Axios
-    return post(constants.api.REQUEST_LOGIN, {
-      email: data.email,
-      password: data.password,
-    })
+    return post(constants.api.REQUEST_LOGIN, data)
       .then(result => {
         // Set localstorage
         if (result.data.data) {
