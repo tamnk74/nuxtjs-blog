@@ -26,6 +26,8 @@ export default {
 
   [types.LOGOUT](state) {
     // Set flag user is logout
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     state.authenticated = false;
     state.user = '';
 
@@ -36,6 +38,7 @@ export default {
 
   [types.SET_USER](state, data) {
     // Reset state in local
+    localStorage.setItem("user", JSON.stringify(data));
     state.authenticated = true;
     state.user = data;
   },

@@ -20,13 +20,21 @@ const createStore = () => {
 		}),
 		// #root mutations
 		mutations: {
-			SET_LOADING(state, loading) {
+			setLoading(state, loading) {
 				state.loading = loading;
 			},
 			notifyError(state, error) {
 				state.error = error;
-				debugger;
-				VueNotifications.error({message: error.message})
+				if (!error.response) {
+					VueNotifications.error({message: error.message})
+				} 
+				else {
+					VueNotifications.error({
+						title: error.response.status + error.response.statusText,
+						message: error.response.data && error.response.data.error.message
+					});
+				}
+				setLoading(state, false);
 			},
 			setAuth(state, auth) {
         state.authentication = auth
