@@ -26,6 +26,7 @@ export default {
 
   [types.LOGOUT](state) {
     // Set flag user is logout
+    console.log("You has been logout to our system!");
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     state.authenticated = false;

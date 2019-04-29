@@ -1,4 +1,4 @@
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import constants from '@/constants';
 
 export default {

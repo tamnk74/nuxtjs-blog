@@ -1,6 +1,33 @@
+.main-content {
+  h2 {
+    text-align: center;
+    font-weight: bold;
+  }
+}
+
 .invalid-feedback {
   width: 100%;
   margin-top: .25rem;
   font-size: 95%;
   color: #dc3545;
+}
+
+.list-kanban {
+  .list-item {
+    width: 240px;
+    float: left;
+    padding: 10px;
+    margin: 10px;
+
+    h3 {
+      text-align: center;
+    }
+  }
+  .thumbnail {
+    width: 240px;
+    height: 200px;
+  }
+  small {
+    color: #0ca678;
+  }
 }

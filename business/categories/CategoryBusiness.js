@@ -14,7 +14,7 @@ export default {
   },
   computed: {
     ...mapState({
-      categories: state => state.categories.categories
+      categories: state => state.categories.categories,
     })
   },
   created() {
@@ -23,6 +23,9 @@ export default {
   methods: {
     initPage() {
       this.$store.dispatch('categories/getCategoryList');
+    },
+    getImageFullPath (category) {
+      return process.env.baseUrl.concat('/uploads/' + category.image);
     }
   }
 }
