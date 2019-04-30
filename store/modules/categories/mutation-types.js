@@ -1,0 +1,7 @@
+export const SET_CATEGORY_LIST = 'SET_CATEGORY_LIST';
+export const SET_CATEGORY = 'SET_CATEGORY';
+
+export default {
+  SET_CATEGORY_LIST,
+  SET_CATEGORY
+}
