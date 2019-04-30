@@ -18,18 +18,16 @@
 
           <div class="form-group">
             <label for="image">Image</label>
-            <input
-              type="file"
-              class="hidden"
-              name="image"
-              v-validate="'required'"
-              @change="onFileSelected"
-              ref="imageInput"
-            >
-            <button type="button" @click="$refs.imageInput.click()">Pick an image</button>
-            <div v-if="selectedFile" id="preview">
-              <img :src="imageURL" alt="Thumbnail">
-            </div>
+            <image-input v-model="image" name="image" v-validate="'required'">
+              <div slot="activator">
+                <div v-if="!image" class="pick-thumbnail">
+                  <span>Pick a thumbnail</span>
+                </div>
+                <div v-else class="thumbnail">
+                  <img :src="image.url" alt="avatar">
+                </div>
+              </div>
+            </image-input>
             <div v-if="errors.has('image')" class="invalid-feedback">{{ errors.first('image') }}</div>
           </div>
 

@@ -2,14 +2,17 @@ import { mapState, mapGetters } from 'vuex';
 import axios from 'axios'
 import constants from "@/constants";
 import VueNotifications from 'vue-notifications'
+import ImageInput from '@/components/ImageInput.vue'
 
 export default {
   data() {
     return {
       title: '',
-      selectedFile: null,
-      imageURL: null
+      image: null
     }
+  },
+  components: {
+    ImageInput: ImageInput
   },
   computed: {
     ...mapState({
@@ -19,20 +22,12 @@ export default {
   created() {
   },
   methods: {
-    onFileSelected(event) {
-      this.selectedFile = event.target.files[0];
-      this.imageURL = URL.createObjectURL(this.selectedFile);
-    },
-    onUpload() {
-      const formData = new FormData();
-      formData.append('image', this.selectedFile, this.selectedFile.name);
-    },
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
           console.log('Uploading...');
           const formData = new FormData();
-          formData.append('image', this.selectedFile, this.selectedFile.name);
+          formData.append('image', this.image.file, this.image.file.name);
           formData.append('title', this.title);
           let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
           axios.defaults.headers.common = {

@@ -7,7 +7,7 @@
 
 .invalid-feedback {
   width: 100%;
-  margin-top: .25rem;
+  margin-top: 0.25rem;
   font-size: 95%;
   color: #dc3545;
 }
@@ -29,5 +29,21 @@
   }
   small {
     color: #0ca678;
+  }
+}
+.pick-thumbnail {
+  width: 240px;
+  height: 200px;
+  text-align: center;
+  background-image: url("/images/default.png");
+}
+.thumbnail {
+  width: 240px;
+  height: 200px;
+
+  img {
+    display: inline-flex;
+    height: inherit;
+    width: inherit;
   }
 }
