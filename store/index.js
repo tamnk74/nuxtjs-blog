@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import posts from './modules/posts';
 import categories from './modules/categories';
 import auth from './modules/auth';
-import VueNotifications from 'vue-notifications'
+import VueNotifications from 'vue-notifications';
 
 Vue.use(Vuex);
 
@@ -26,6 +26,7 @@ const createStore = () => {
 				state.loading = loading;
 			},
 			notifyError(state, error) {
+				console.log('ERROR: ', error);
 				state.error = error;
 				if (!error.response) {
 					VueNotifications.error({ message: error.message })
@@ -42,7 +43,7 @@ const createStore = () => {
 						state.auth.user = '';
 					}
 				}
-				this.setLoading(state, false);
+				state.loading = false;
 			},
 			setAuth(state, auth) {
 				state.authentication = auth

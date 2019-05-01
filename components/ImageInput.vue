@@ -19,7 +19,6 @@
 export default {
   name: "image-input",
   data: () => ({
-    name: "file",
     maxSize: 1024,
     file: null
   }),

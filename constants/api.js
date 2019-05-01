@@ -2,7 +2,7 @@ export default {
   // Limit record show on a page
   IMAGE_PATH: '/uploads',
   GET_POST_LIST: 'posts/latest',
-  ROOT_POST: 'posts',
+  STD_POST: 'posts',
   GET_POST_DETAIL: 'posts',
   CREATE_NEW_POST: 'posts',
   STD_CATEGORY: 'categories',

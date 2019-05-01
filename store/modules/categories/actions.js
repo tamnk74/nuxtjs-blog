@@ -15,10 +15,10 @@ export const getCategoryList = ({ commit }, data) => {
       commit("setLoading", false, { root: true });
       resolve(HTTP_SUCCESS);
     })
-    .catch(e => {
+    .catch(error => {
       commit("setLoading", false, { root: true });
       commit("notifyError", error, { root: true });
-      reject(e);
+      reject(error);
     });
   });
 };

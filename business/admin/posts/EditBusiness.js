@@ -3,11 +3,15 @@ import constants from '@/constants';
 import { CoolSelect } from 'vue-cool-select'
 
 export default {
-  name: 'CreatePost',
+  name: 'EditPost',
   layout: 'default',
+  validate ({ params }) {
+    const v4 = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
+    return v4.test(params.id);
+  },
   head() {
     return {
-      title: 'Create new post'
+      title: 'Edit post'
     }
   },
   components: {
@@ -15,23 +19,27 @@ export default {
   },
   computed: {
     ...mapState({
-      categories: state => state.categories.categories
-    })
+      categories: state => state.categories.categories,
+      posts: state => state.posts.posts,
+    }),
+    post: function() {
+      const postId = this.$route.params.id;
+      const postFilter = this.posts.filter(post => post.id === postId);
+      return postFilter && postFilter[0] || {};
+    }
   },
   data() {
     return {
       error: false,
       is_submit: false,
-      title: '',
-      content: '',
-      categoryId: null
     }
   },
   created() {
     this.initPage();
   },
   methods: {
-    initPage() {
+    initPage () {
+      this.$store.dispatch('posts/getPostList');
       this.$store.dispatch('categories/getCategoryList');
     },
     getImageFullPath (category) {
@@ -42,15 +50,15 @@ export default {
         if (valid) {
           this.$nuxt.$loading.start();
           // Get user input
-          let post = {
-            title: this.title,
-            content: this.content,
-            categoryId: this.categoryId
-          };
           this.error = false;
           this.is_submit = true;
-          this.$store.dispatch('posts/createPost', post);
-          this.$router.push({name: 'posts'});
+          this.$store.dispatch('posts/updatePost', {
+            id: this.post.id,
+            title: this.post.title,
+            content: this.post.content,
+            categoryId: this.post.categoryId
+          });
+          this.$router.push({name: 'admin-posts'});
         }
       }).catch(() => {
         return false;

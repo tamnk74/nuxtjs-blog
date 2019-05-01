@@ -1,5 +1,4 @@
 import markdown from 'markdown';
-import moment from 'moment';
 import constant from '@/constants';
 import {get, post} from '@/plugins/api';
 import {mapState, mapGetters} from 'vuex';
@@ -12,20 +11,13 @@ export default {
   computed: {
     ...mapState({
       // TODO: Replace booking code with data from 340 screen
-      posts: state => state.posts.posts,
-      key: state => state.key || '',
-    }),
-    filteredPosts: () => {
-      return this.posts.filter(post => post.title.match(this.key));
-    }
+      posts: state => state.posts.posts
+    })
   },
   created() {
     this.initPage();
   },
   methods: {
-    formatDate (datetime) {
-      return moment(datetime).format('DD-MMM-YYYY');
-    },
     shortContent (post) {
       let content = document.createElement("div")
       content.innerHTML = markdown.markdown.toHTML(post.content || '');
@@ -33,6 +25,12 @@ export default {
     },
     initPage () {
       this.$store.dispatch('posts/getPostList');
+    },
+    deletePost (id) {
+      if (confirm('Are you sure to delete this post')) {
+        this.$store.dispatch('posts/deletePost', id);
+        this.$router.push({name: 'admin-posts'})
+      }
     }
   }
 }

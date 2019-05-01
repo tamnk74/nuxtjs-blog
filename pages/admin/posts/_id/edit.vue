@@ -11,7 +11,7 @@
               name="title"
               class="form-control"
               v-validate="'required'"
-              v-model="title"
+              v-model="post.title"
             >
             <div v-if="errors.has('title')" class="invalid-feedback">{{ errors.first('title') }}</div>
           </div>
@@ -22,7 +22,7 @@
               class="form-control"
               name="content"
               v-validate="'required'"
-              v-model="content"
+              v-model="post.content"
               rows="10"
               cols="50"
             />
@@ -33,7 +33,7 @@
             <label for="categoryId">Category</label>
             <cool-select
               name="categoryId"
-              v-model="categoryId"
+              v-model="post.categoryId"
               :items="categories"
               item-value="id"
               item-text="title"
@@ -69,7 +69,7 @@
   </div>
 </template>
 
-<script  src="@/business/posts/CreateBusiness.js"></script>
+<script  src="@/business/admin/posts/EditBusiness.js"></script>
 
 <style lang="scss" >
 </style>

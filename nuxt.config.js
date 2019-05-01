@@ -41,7 +41,8 @@ export default {
   */
   plugins: [
     { src: "~/plugins/vee-validate.js", ssr: false },
-    { src: "~/plugins/vue-notifications", ssr: false }
+    { src: "~/plugins/vue-notifications", ssr: false },
+    { src: "~/plugins/vue-cool-select", ssr: false }
   ],
 
   /*

@@ -1,4 +1,5 @@
 import * as types from './mutation-types';
+import { debug } from 'util';
 
 export default {
   [types.SET_POST_LIST](state, data) {
@@ -7,5 +8,12 @@ export default {
   },
   [types.SET_POST](state, post) {
     state.post = post;
+  },
+  [types.UPDATE_POST](state, data) {
+    state.posts = [...state.posts.filter(post => post !== data.id), data];
+  },
+  [types.DELETE_POST](state, id) {
+    debugger;
+    state.posts = state.posts.filter(post => post.id !== id);
   },
 }

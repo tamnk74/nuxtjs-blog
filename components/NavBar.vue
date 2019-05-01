@@ -47,6 +47,7 @@
         </div>
         <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right">
+          <li v-if="authenticated"><nuxt-link to="/admin/posts" class="dropdown-item">All posts</nuxt-link></li>
           <!-- Authentication Links -->
           <li v-if="authenticated" class="dropdown">
             <a
@@ -60,7 +61,7 @@
               <li><nuxt-link to="/profile" class="dropdown-item">Profile</nuxt-link></li>
               <li><nuxt-link to="/posts/create" class="dropdown-item">New post</nuxt-link></li>
               <li><nuxt-link to="/categories/create" class="dropdown-item">New Category</nuxt-link></li>
-              <li><nuxt-link to="/my-post" class="dropdown-item">My post</nuxt-link></li>
+              <li><nuxt-link to="/mypost" class="dropdown-item">My post</nuxt-link></li>
               <li><a class="dropdown-item" href="#" @click="logout">Logout</a></li>
             </ul>
           </li>
