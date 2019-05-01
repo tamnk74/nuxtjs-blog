@@ -47,7 +47,32 @@
         </div>
         <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right">
-          <li v-if="authenticated"><nuxt-link to="/admin/posts" class="dropdown-item">All posts</nuxt-link></li>
+          <li v-if="authenticated" class="dropdown">
+            <a
+              class="dropdown-toggle"
+              id="navbarDropdownMenuAdminLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Administration
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <nuxt-link to="/admin/posts" class="dropdown-item">All posts</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/admin/categories" class="dropdown-item">All categories</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/admin/users" class="dropdown-item">All users</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/admin/tags" class="dropdown-item">All tags</nuxt-link>
+              </li>
+            </ul>
+          </li>
           <!-- Authentication Links -->
           <li v-if="authenticated" class="dropdown">
             <a
@@ -56,13 +81,26 @@
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-            >{{ getName }}<span class="caret"></span></a>
+            >
+              {{ getName }}
+              <span class="caret"></span>
+            </a>
             <ul class="dropdown-menu" role="menu">
-              <li><nuxt-link to="/profile" class="dropdown-item">Profile</nuxt-link></li>
-              <li><nuxt-link to="/posts/create" class="dropdown-item">New post</nuxt-link></li>
-              <li><nuxt-link to="/categories/create" class="dropdown-item">New Category</nuxt-link></li>
-              <li><nuxt-link to="/mypost" class="dropdown-item">My post</nuxt-link></li>
-              <li><a class="dropdown-item" href="#" @click="logout">Logout</a></li>
+              <li>
+                <nuxt-link to="/profile" class="dropdown-item">Profile</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/posts/create" class="dropdown-item">New post</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/categories/create" class="dropdown-item">New Category</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/mypost" class="dropdown-item">My post</nuxt-link>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" @click="logout">Logout</a>
+              </li>
             </ul>
           </li>
           <li v-else class="nav-item">
