@@ -121,6 +121,7 @@ export default {
     return {};
   },
   created() {
+    console.log('Loaded NAVBAR!');
     this.$store.dispatch("auth/check");
   },
   computed: {

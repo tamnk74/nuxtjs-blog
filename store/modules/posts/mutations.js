@@ -13,7 +13,6 @@ export default {
     state.posts = [...state.posts.filter(post => post !== data.id), data];
   },
   [types.DELETE_POST](state, id) {
-    debugger;
     state.posts = state.posts.filter(post => post.id !== id);
   },
 }

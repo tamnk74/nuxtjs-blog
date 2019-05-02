@@ -8,4 +8,10 @@ export default {
   [types.SET_CATEGORY](state, category) {
     state.category = category;
   },
+  [types.UPDATE_CATEGORY](state, data) {
+    state.categories = [...state.categories.filter(category => category !== data.id), data];
+  },
+  [types.DELETE_CATEGORY](state, id) {
+    state.categories = state.categories.filter(category => category.id !== id);
+  },
 }

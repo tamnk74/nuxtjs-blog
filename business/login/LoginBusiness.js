@@ -44,7 +44,6 @@ export default {
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
-          debugger;
           this.$nuxt.$loading.start();
           // Get user input
           let user = Object.assign({

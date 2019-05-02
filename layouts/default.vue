@@ -9,7 +9,10 @@ import NavBar from "~/components/NavBar.vue";
 export default {
   components: {
     NavBar
-  }
+  },
+  created () {
+    console.log('Loaded layout!');
+  } 
 };
 </script>
 <style lang="scss" >

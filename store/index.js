@@ -6,6 +6,7 @@ import auth from './modules/auth';
 import VueNotifications from 'vue-notifications';
 
 Vue.use(Vuex);
+console.log('Loading vuex');
 
 const createStore = () => {
 	return new Vuex.Store({
