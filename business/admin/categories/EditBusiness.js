@@ -37,8 +37,11 @@ export default {
         if (valid) {
           console.log('Uploading...');
           const formData = new FormData();
-          formData.append('image', this.image.file, this.image.file.name);
-          formData.append('title', this.title);
+          formData.append('title', this.category.title);
+          if (this.category.image.file) {
+            formData.append('image', this.category.image.file, this.category.image.file.name);
+          }
+          
           let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
           axios.defaults.headers.common = {
             'Content-Type': 'multipart/form-data',
@@ -46,14 +49,14 @@ export default {
           };
           return axios({
             method: 'PUT',
-            url: process.env.baseUrl.concat('/api/' + constants.api.STD_CATEGORY),
+            url: process.env.baseUrl.concat('/api/' + constants.api.STD_CATEGORY + '/' + this.category.id),
             data: formData
           }).then(response => {
             VueNotifications.success({
               title: response.status + ' ' + response.statusText,
               message: 'Successfully !'
             });
-            this.$router.push({ name: 'categories'});
+            this.$router.push({ name: 'admins-categories'});
           })
             .catch(error => {
               this.$store.commit("notifyError", error, { root: true });
