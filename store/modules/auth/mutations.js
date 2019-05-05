@@ -38,10 +38,9 @@ export default {
   },
 
   [types.SET_USER](state, data) {
-    // Reset state in local
-    localStorage.setItem("user", JSON.stringify(data));
     state.authenticated = true;
     state.user = data;
+    console.log('%c Authentification successfull', 'color: green');  
   },
 
 }

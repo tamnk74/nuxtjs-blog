@@ -1,45 +1,47 @@
-import { mapState, mapGetters } from 'vuex';
+import {mapState} from "vuex";
 import axios from 'axios';
+import Datepicker from 'vuejs-datepicker';
 import constants from "@/constants";
 import VueNotifications from 'vue-notifications';
 import ImageInput from '@/components/ImageInput.vue';
 
 export default {
-  data() {
+  name: 'EditProfile',
+  components: {
+    Datepicker,
+    ImageInput
+  },
+  data () {
     return {
     }
   },
-  components: {
-    ImageInput: ImageInput
+  created () {
+    console.log('%c Edit Profile created ...', 'color: blue');
+    this.$store.dispatch("auth/check");
   },
   computed: {
     ...mapState({
-      categories: state => state.categories.categories
-    }),
-    category: function() {
-      const categoryId = this.$route.params.id;
-      const categoryFilter = this.categories.filter(category => category.id === categoryId);
-      return categoryFilter && categoryFilter[0] || {};
-    }
-  },
-  created() {
-    this.initPage();
+      authenticated: state => state.auth.authenticated,
+      user: state => state.auth.user
+    })
   },
   methods: {
-    initPage() {
-      this.$store.dispatch('categories/getCategoryList');
-    },
-    getImageFullPath (category) {
-      return process.env.baseUrl.concat(constants.path.CATEGORY_THUMBNAILS + '/' + category.image);
+    getAvatarFullPath (user) {
+      return process.env.baseUrl.concat(constants.path.USER_AVATAR + '/' + user.avatar);
     },
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
           console.log('Uploading...');
           const formData = new FormData();
-          formData.append('title', this.category.title);
-          if (this.category.image.file) {
-            formData.append('image', this.category.image.file, this.category.image.file.name);
+          formData.append('fullName', this.user.fullName);
+          formData.append('email', this.user.email);
+          formData.append('address', this.user.address);
+          if (this.user.birthday) {
+            formData.append('birthday', this.user.birthday);
+          }
+          if (this.user.avatar.file) {
+            formData.append('avatar', this.user.avatar.file, this.user.avatar.file.name);
           }
           
           let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
@@ -49,14 +51,15 @@ export default {
           };
           return axios({
             method: 'PUT',
-            url: process.env.baseUrl.concat('/api/' + constants.api.STD_CATEGORY + '/' + this.category.id),
+            url: process.env.baseUrl.concat('/api/' + constants.api.UPDATE_PROFILE),
             data: formData
           }).then(response => {
             VueNotifications.success({
               title: response.status + ' ' + response.statusText,
               message: 'Successfully !'
             });
-            this.$router.push({ name: 'admins-categories'});
+            this.$store.dispatch("auth/check");
+            this.$router.push({ name: 'profile'});
           })
             .catch(error => {
               this.$store.commit("notifyError", error, { root: true });

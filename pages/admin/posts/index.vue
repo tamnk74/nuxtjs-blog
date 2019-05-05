@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <div class="main-content">
-      <table class="table table-hover">
+      <div class="alert alert-info" v-if="posts.length <= 0">
+        <strong>Whoops! </strong> There is no post!
+      </div>
+
+      <table v-else class="table table-hover">
         <thead>
           <tr>
             <th>Id</th>
@@ -12,7 +16,7 @@
         </thead>
         <tbody>
           <tr v-for="post in posts" :key="post.id">
-            <td>{{ post.id }}</td>
+            <td><nuxt-link :to="{name: 'admin-posts-id', params: {id: post.id}}">{{ post.id }}</nuxt-link></td>
             <td>{{ post.title }}</td>
             <td>{{ shortContent(post) }}</td>
             <td>

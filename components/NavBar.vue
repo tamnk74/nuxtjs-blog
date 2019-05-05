@@ -82,7 +82,7 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              {{ getName }}
+              {{ user.fullName }}
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
@@ -120,16 +120,21 @@ export default {
   data() {
     return {};
   },
+  async asyncData ({ params }) {
+    console.log('%c Navbar asyncData ...', 'color: blue');
+    return { com: 'Com'};
+  },
   created() {
-    console.log('Loaded NAVBAR!');
+    console.log('%c Navbar created ...', 'color: blue');
     this.$store.dispatch("auth/check");
   },
   computed: {
-    ...mapGetters({
-      getName: "auth/getName"
-    }),
     ...mapState({
-      authenticated: state => state.auth && state.auth.authenticated
+      authenticated: state => state.auth.authenticated,
+      user: state => {
+        console.log('%c Navbar computed ...', 'color: blue');
+        return state.auth.user;
+      }
     })
   },
   methods: {
@@ -142,5 +147,8 @@ export default {
 <style scoped>
 .navbar-collapse {
   margin-bottom: 0px;
+}
+.nuxt-link-exact-active{
+  border-bottom: 2px solid #1bb3ba61;
 }
 </style>

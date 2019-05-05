@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <div class="main-content">
-      <div class="list-group">
+      <div class="alert alert-info" v-if="posts.length <= 0">
+        <strong>Whoops! </strong> There is no post!
+      </div>
+      <div v-else class="list-group">
         <div class="list-group-item" v-for="(post, index) in posts" :key="index">
           <h2>
             <nuxt-link :to="{name: 'posts-id', params: {id: post.id}}">{{ post.title }}</nuxt-link>

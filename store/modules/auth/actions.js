@@ -6,7 +6,25 @@ import Vue from 'vue';
 const HTTP_SUCCESS = 200;
 
 export const check = ({ commit }) => {
-  commit(types.CHECK);
+  commit("setLoading", true, { root: true });
+
+  return new Promise((resolve, reject) => {
+    // Post data to API by Axios
+    return get(constants.api.REQUEST_GET_AUTH)
+      .then(result => {
+        if (result.data.data) {
+          commit(types.SET_USER, result.data.data);
+          commit("setLoading", false, { root: true });
+          resolve(HTTP_SUCCESS);
+          console.log('Auth success');
+          
+        }
+      })
+      .catch(error => {
+        commit("notifyError", error, { root: true });
+        reject(error);
+      });
+  });
 };
 
 //This is login function

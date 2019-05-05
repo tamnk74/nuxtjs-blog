@@ -1,4 +1,5 @@
 import { mapState } from 'vuex';
+import constants from "@/constants";
 
 export default {
   name: 'admin-categories',
@@ -26,7 +27,7 @@ export default {
       this.$store.dispatch('categories/getCategoryList');
     },
     getImageFullPath (category) {
-      return process.env.baseUrl.concat('/uploads/' + category.image);
+      return process.env.baseUrl.concat(constants.path.CATEGORY_THUMBNAILS + '/' + category.image);
     },
     deleteCategory (id) {
       if (confirm('Are you sure to delete this category')) {

@@ -4,10 +4,11 @@ export default {
     return state.authenticated;
   },
   getName: (state) => {
+    console.warn('Getter Name');
+    
     if (state.user) {
-      const {firstName, lastName} = state.user;
-      return firstName + ' ' + lastName;
+      return state.user.fullName;
     }
-    return '';
+    return '...';
   },
 }
