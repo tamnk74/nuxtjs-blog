@@ -7,6 +7,26 @@ import ImageInput from '@/components/ImageInput.vue';
 
 export default {
   name: 'EditProfile',
+  async asyncData (context) {
+    console.log('%c Profile asyncData...', 'color: blue; font-size: 20px;');
+    let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
+
+    axios.defaults.headers.common = {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token,
+    };
+
+    const result = await axios({
+      method: 'GET',
+      url: process.env.baseUrl + '/api/auth/userInfo',
+      params: {}
+    });
+
+    if (result.status == 200) {
+      result.data.data.avatar = {name: result.data.data.avatar};
+      return { user: result.data.data }
+    }
+  },
   components: {
     Datepicker,
     ImageInput
@@ -22,12 +42,11 @@ export default {
   computed: {
     ...mapState({
       authenticated: state => state.auth.authenticated,
-      user: state => state.auth.user
     })
   },
   methods: {
     getAvatarFullPath (user) {
-      return process.env.baseUrl.concat(constants.path.USER_AVATAR + '/' + user.avatar);
+      return process.env.baseUrl.concat(constants.path.USER_AVATAR + '/' + user.avatar.name);
     },
     onSubmit() {
       this.$validator.validateAll().then((valid) => {

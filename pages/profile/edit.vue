@@ -64,7 +64,7 @@
                 <datepicker
                   v-model="user.birthday"
                   name="birthday"
-                  format="yyyy-MM-dd"
+                  format="dd-MMM-yyyy"
                   input-class="form-control"
                 ></datepicker>
                 <div
