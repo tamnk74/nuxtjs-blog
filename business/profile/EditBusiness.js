@@ -7,7 +7,7 @@ import ImageInput from '@/components/ImageInput.vue';
 
 export default {
   name: 'EditProfile',
-  async asyncData (context) {
+  async asyncData ({ store }) {
     console.log('%c Profile asyncData...', 'color: blue; font-size: 20px;');
     let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
 
@@ -26,6 +26,7 @@ export default {
       result.data.data.avatar = {name: result.data.data.avatar};
       return { user: result.data.data }
     }
+    // await store.dispatch("auth/check");
   },
   components: {
     Datepicker,
@@ -42,6 +43,7 @@ export default {
   computed: {
     ...mapState({
       authenticated: state => state.auth.authenticated,
+      user: state => state.auth.user
     })
   },
   methods: {

@@ -18,14 +18,7 @@
 
           <div class="form-group">
             <label for="password">Content</label>
-            <textarea
-              class="form-control"
-              name="content"
-              v-validate="'required'"
-              v-model="post.content"
-              rows="10"
-              cols="50"
-            />
+            <MarkdownEditor v-model="post.content" name="content"></MarkdownEditor>
             <div v-if="errors.has('content')" class="invalid-feedback">{{ errors.first('content') }}</div>
           </div>
 

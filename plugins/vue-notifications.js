@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueNotifications from 'vue-notifications'
 import miniToastr from 'mini-toastr'
+import AudioRecorder from 'vue-audio-recorder'
+
+Vue.use(AudioRecorder)
 
 const toastTypes = {
   success: 'success',
@@ -8,10 +11,10 @@ const toastTypes = {
   info: 'info',
   warn: 'warn'
 }
- 
-miniToastr.init({types: toastTypes});
 
-function toast ({title, message, type, timeout, cb}) {
+miniToastr.init({ types: toastTypes });
+
+function toast({ title, message, type, timeout, cb }) {
   return miniToastr[type](message, title, timeout, cb)
 }
 

@@ -76,13 +76,13 @@
           <!-- Authentication Links -->
           <li v-if="authenticated" class="dropdown">
             <a
-              class="dropdown-toggle"
+              class="dropdown-toggle avatar-area"
               id="navbarDropdownMenuLink"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >
-              {{ user.fullName }}
+              <img :src="getAvatarPath(user)" class="avatar-icon"/> {{ user.fullName }}
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
@@ -114,6 +114,7 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from "vuex";
+import constants from "@/constants";
 
 export default {
   name: "NavbarMenu",
@@ -122,11 +123,12 @@ export default {
   },
   async asyncData ({ params }) {
     console.log('%c Navbar asyncData ...', 'color: blue');
-    return { com: 'Com'};
   },
   created() {
     console.log('%c Navbar created ...', 'color: blue');
-    this.$store.dispatch("auth/check");
+    if (localStorage.getItem("token")) {
+      this.$store.dispatch("auth/check");
+    }
   },
   computed: {
     ...mapState({
@@ -138,6 +140,9 @@ export default {
     })
   },
   methods: {
+    getAvatarPath (user) {
+      return process.env.baseUrl.concat(constants.path.USER_AVATAR + '/' + user.avatar);
+    },
     logout() {
       this.$store.dispatch("auth/logout");
     }
@@ -150,5 +155,14 @@ export default {
 }
 .nuxt-link-exact-active{
   border-bottom: 2px solid #1bb3ba61;
+}
+.avatar-area {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.avatar-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
 }
 </style>

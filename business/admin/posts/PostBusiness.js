@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     shortContent (post) {
-      let content = document.createElement("div")
+      let content = document.createElement("div");
       content.innerHTML = markdown.markdown.toHTML(post.content || '');
       return content.textContent.slice(0, 280);
     },

@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     <div class="main-content">
+      <div class="row">
+        <div class="col-sm-12">
+          <nuxt-link :to="{ name: 'admin-posts-create'}" class="btn btn-success">Create</nuxt-link>
+        </div>
+      </div>
       <div class="alert alert-info" v-if="posts.length <= 0">
         <strong>Whoops! </strong> There is no post!
       </div>

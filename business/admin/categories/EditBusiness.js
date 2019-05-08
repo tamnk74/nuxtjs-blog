@@ -56,7 +56,7 @@ export default {
               title: response.status + ' ' + response.statusText,
               message: 'Successfully !'
             });
-            this.$router.push({ name: 'admins-categories'});
+            this.$router.push({ name: 'admin-categories'});
           })
             .catch(error => {
               this.$store.commit("notifyError", error, { root: true });

@@ -1,6 +1,11 @@
 <template>
   <div class="container">
     <div class="main-content">
+      <div class="row">
+        <div class="col-sm-12">
+          <nuxt-link :to="{ name: 'admin-categories-create'}" class="btn btn-success">Create</nuxt-link>
+        </div>
+      </div>
       <table v-if="view != 'kanban'" class="table table-hover">
         <thead>
           <tr>

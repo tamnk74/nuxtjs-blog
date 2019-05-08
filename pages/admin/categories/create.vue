@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="panel panel-default width-100">
-      <div class="panel-heading">New Post</div>
+      <div class="panel-heading">New Category</div>
       <div class="panel-body">
         <form class="form-horizontal" role="form">
           <div class="form-group">

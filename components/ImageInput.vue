@@ -22,10 +22,7 @@ export default {
     maxSize: 1024,
     file: null
   }),
-  props: {
-    name: '',
-    value: Object
-  },
+  props: ['name', 'value'],
   methods: {
     launchFilePicker() {
       this.$refs.file.click();
