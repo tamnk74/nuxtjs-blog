@@ -2,7 +2,7 @@ import { mapState, mapGetters } from 'vuex';
 import axios from 'axios'
 import constants from "@/constants";
 import VueNotifications from 'vue-notifications'
-import ImageInput from '@/components/ImageInput.vue'
+import ImageInput from '@/components/ImageInput'
 
 export default {
   data() {

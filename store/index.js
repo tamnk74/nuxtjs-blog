@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import posts from './modules/posts';
 import categories from './modules/categories';
 import auth from './modules/auth';
+import users from './modules/users';
 import VueNotifications from 'vue-notifications';
 
 Vue.use(Vuex);
@@ -13,6 +14,7 @@ const createStore = () => {
 		// Assign the modules to the store
 		modules: {
 			auth,
+			users,
 			posts,
 			categories,
 		},

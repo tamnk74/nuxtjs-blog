@@ -1,5 +1,6 @@
 export default {
-  authenticated: false,
+  users: [],
+  pageInfo: {},
   user: {
   }
 }

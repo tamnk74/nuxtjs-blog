@@ -43,7 +43,6 @@ export default {
   computed: {
     ...mapState({
       authenticated: state => state.auth.authenticated,
-      user: state => state.auth.user
     })
   },
   methods: {
@@ -60,6 +59,10 @@ export default {
           formData.append('address', this.user.address);
           if (this.user.birthday) {
             formData.append('birthday', this.user.birthday);
+          }
+          if (this.user.oldPassword) {
+            formData.append('password', this.user.password);
+            formData.append('oldPassword', this.user.oldPassword);
           }
           if (this.user.avatar.file) {
             formData.append('avatar', this.user.avatar.file, this.user.avatar.file.name);

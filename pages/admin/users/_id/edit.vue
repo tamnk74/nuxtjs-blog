@@ -22,6 +22,20 @@
             </div>
             <div v-if="user" class="col-sm-6 col-md-8">
               <div class="form-group">
+                <label for="name">User Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  v-validate="'required'"
+                  v-model="user.name"
+                >
+                <div
+                  v-if="errors.has('name')"
+                  class="invalid-feedback"
+                >{{ errors.first('name') }}</div>
+              </div>
+              <div class="form-group">
                 <label for="fullName">Full Name</label>
                 <input
                   type="text"
@@ -29,6 +43,7 @@
                   class="form-control"
                   v-validate="'required'"
                   v-model="user.fullName"
+                  data-vv-as="full name"
                 >
                 <div
                   v-if="errors.has('fullName')"
@@ -73,14 +88,18 @@
                 >{{ errors.first('birthday') }}</div>
               </div>
               <div class="form-group">
-                <label for="oldPassword">Current Password</label>
-                <input
-                  type="password"
-                  name="oldPassword"
+                <label for="role">Role</label>
+                <select
+                  type="text"
+                  name="role"
                   class="form-control"
-                  v-model="user.oldPassword"
+                  v-validate="'required'"
+                  v-model="user.role"
                 >
-                <div v-if="errors.has('oldPassword')" class="invalid-feedback">{{ errors.first('oldPassword') }}</div>
+                <option value="USER" selected="selected">User</option>
+                <option value="ADMIN">Admin</option>
+                </select>
+                <div v-if="errors.has('role')" class="invalid-feedback">{{ errors.first('role') }}</div>
               </div>
               <div class="form-group">
                 <label for="password">New Password</label>
@@ -88,7 +107,7 @@
                   type="password"
                   name="password"
                   class="form-control"
-                  v-validate="'confirmed:confirmation'"
+                  v-validate="'min:6|confirmed:confirmation'"
                   v-model="user.password"
                 >
                 <div v-if="errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
@@ -117,8 +136,8 @@
   </div>
 </template>
 
-<script  src="@/business/profile/EditBusiness.js"></script>
+<script  src="@/business/admin/users/EditBusiness.js"></script>
 
-<style lang="scss" >
-@import "./assets/scss/profile";
+<style lang="scss">
+@import "./assets/scss/users";
 </style>

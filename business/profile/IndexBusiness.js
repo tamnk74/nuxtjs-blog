@@ -5,26 +5,8 @@ import constants from "@/constants";
 
 export default {
   name: 'Profile',
-  async asyncData (context) {
-    console.log('%c Profile asyncData...', 'color: blue; font-size: 20px;');
-    let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
-
-    axios.defaults.headers.common = {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    };
-
-    const result = await axios({
-      method: 'GET',
-      url: process.env.baseUrl + '/api/auth/userInfo',
-      params: {}
-    });
-
-    if (result.status == 200) {
-      return { user: result.data.data }
-    }
-
-    return {}
+  async asyncData ({ store }) {
+    await store.dispatch("auth/check");
   },
   data () {
     return {
@@ -35,7 +17,8 @@ export default {
   },
   computed: {
     ...mapState({
-      authenticated: state => state.auth.authenticated
+      authenticated: state => state.auth.authenticated,
+      user: state => state.auth.user,
     }),
     
   },
