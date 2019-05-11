@@ -6,6 +6,7 @@ import MarkdownEditor from '@/components/MarkdownEditor.vue';
 export default {
   name: 'CreatePost',
   layout: 'default',
+  middleware: 'admin',
   head() {
     return {
       title: 'Create new post'

@@ -4,6 +4,7 @@ import {get, post} from '@/plugins/api';
 import {mapState, mapGetters} from 'vuex';
 
 export default {
+  middleware: 'admin',
   data() {
     return {
     }

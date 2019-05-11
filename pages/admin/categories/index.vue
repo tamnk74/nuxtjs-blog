@@ -9,17 +9,15 @@
       <table v-if="view != 'kanban'" class="table table-hover">
         <thead>
           <tr>
-            <th width="30%">Id</th>
-            <th>Thumbnail</th>
+            <th width="20%">Thumbnail</th>
             <th>Title</th>
             <th width="20%">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="category in categories" :key="category.id">
-            <td><nuxt-link :to="{name: 'admin-categories-id', params: {id: category.id}}">{{ category.id }}</nuxt-link></td>
             <td><img :src="getImageFullPath(category)" class="media-object" style="width:60px"></td>
-            <td>{{ category.title }}</td>
+            <td><nuxt-link :to="{name: 'admin-categories-id', params: {id: category.id}}">{{ category.title }}</nuxt-link></td>
             <td>
               <nuxt-link
                 :to="{name: 'admin-categories-id-edit', params: { id: category.id }}"

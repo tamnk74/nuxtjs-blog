@@ -6,6 +6,7 @@ import MarkdownEditor from '@/components/MarkdownEditor.vue';
 export default {
   name: 'AdminEditPost',
   layout: 'default',
+  middleware: 'admin',
   validate ({ params }) {
     const v4 = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
     return v4.test(params.id);

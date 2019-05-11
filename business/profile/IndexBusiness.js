@@ -1,10 +1,10 @@
 import {mapState} from "vuex";
 import moment from 'moment';
-import axios from 'axios';
 import constants from "@/constants";
 
 export default {
   name: 'Profile',
+  middleware: 'authenticated',
   async asyncData ({ store }) {
     await store.dispatch("auth/check");
   },

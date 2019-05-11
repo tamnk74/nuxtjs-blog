@@ -8,6 +8,7 @@ import VueNotifications from 'vue-notifications'
 export default {
   name: 'EditUser',
   layout: 'default',
+  middleware: 'admin',
   head() {
     return {
       title: 'Edit user'
@@ -48,6 +49,8 @@ export default {
           formData.append('address', this.user.address);
           formData.append('birthday', this.user.birthday);
           formData.append('role', this.user.role);
+          formData.append('status', this.user.status);
+          formData.append('verify_code', this.user.verify_code);
           if (this.user.password) {
             formData.append('password', this.user.password);
           }

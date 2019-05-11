@@ -12,7 +12,7 @@
           <ul class="list-inline">
             <li>
               <i class="fa fa-user"></i> By:
-              <a href="#">{{ post.user && (post.user.firstName + ' ' + post.user.lastName) }}</a>
+              <a href="#">{{ post.user && (post.user.fullName) }}</a>
             </li>
             <li>
               |

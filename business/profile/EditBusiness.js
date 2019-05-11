@@ -7,6 +7,7 @@ import ImageInput from '@/components/ImageInput.vue';
 
 export default {
   name: 'EditProfile',
+  middleware: 'authenticated',
   async asyncData ({ store }) {
     console.log('%c Profile asyncData...', 'color: blue; font-size: 20px;');
     let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';

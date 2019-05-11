@@ -69,7 +69,7 @@
                   type="text"
                   name="email"
                   class="form-control"
-                  v-validate="'required'"
+                  v-validate="'required|existMail:' + user.id"
                   v-model="user.email"
                 >
                 <div v-if="errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
@@ -102,6 +102,32 @@
                 <div v-if="errors.has('role')" class="invalid-feedback">{{ errors.first('role') }}</div>
               </div>
               <div class="form-group">
+                <label for="status">Status</label>
+                <select
+                  type="text"
+                  name="status"
+                  class="form-control"
+                  v-validate="'required'"
+                  v-model="user.status"
+                >
+                <option value="BLOCKED" :selected="user.status == 'BLOCKED' ? 'selected' : ''">BLOCKED</option>
+                <option value="INACTIVE" :selected="user.status == 'INACTIVE' ? 'selected' : ''">INACTIVE</option>
+                <option value="ACTIVE" :selected="user.status == 'ACTIVE' ? 'selected' : ''">ACTIVE</option>
+                </select>
+                <div v-if="errors.has('status')" class="invalid-feedback">{{ errors.first('status') }}</div>
+              </div>
+              <div class="form-group">
+                <label for="verify_code">Verify Code</label>
+                <input
+                  type="text"
+                  name="verify_code"
+                  class="form-control"
+                  v-validate="'min:6'"
+                  v-model="user.verify_code"
+                >
+                <div v-if="errors.has('verify_code')" class="invalid-feedback">{{ errors.first('verify_code') }}</div>
+              </div>
+              <div class="form-group">
                 <label for="password">New Password</label>
                 <input
                   type="password"
@@ -112,6 +138,7 @@
                 >
                 <div v-if="errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
               </div>
+              
               <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
                 <input

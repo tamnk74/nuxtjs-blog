@@ -4,6 +4,7 @@ import constants from "@/constants";
 export default {
   name: 'admin-categories',
   layout: 'default',
+  middleware: 'admin',
   head() {
     return {
       title: 'All categories'

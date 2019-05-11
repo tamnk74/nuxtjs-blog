@@ -69,7 +69,7 @@
                   type="text"
                   name="email"
                   class="form-control"
-                  v-validate="'required'"
+                  v-validate="'required|existMail'"
                   v-model="user.email"
                 >
                 <div v-if="errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>

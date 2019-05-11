@@ -15,6 +15,7 @@
           <tr>
             <th>Avatar</th>
             <th>Name</th>
+            <th>email</th>
             <th>Fullname</th>
             <th>Address</th>
             <th>Birthday</th>
@@ -26,15 +27,14 @@
             <td><img :src="getAvatarFullPath(user)" alt="Avatar" class="avatar-icon"></td>
             <td><nuxt-link :to="{name: 'admin-users-id', params: {id: user.id}}">{{ user.name }}</nuxt-link></td>
             <td>{{ user.fullName }}</td>
+            <td>{{ user.email }}</td>
             <td>{{ user.address }}</td>
-            <td>{{ user.birthday }}</td>
+            <td>{{ formatDate(user.birthday) }}</td>
             <td>
               <nuxt-link
                 :to="{name: 'admin-users-id-edit', params: { id: user.id }}"
                 class="btn btn-primary"
               >Edit</nuxt-link>
-            </td>
-            <td>
               <button class="btn btn-danger" @click="deleteUser(user.id)">Delete</button>
             </td>
           </tr>

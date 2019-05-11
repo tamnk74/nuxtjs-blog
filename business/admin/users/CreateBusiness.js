@@ -8,6 +8,7 @@ import VueNotifications from 'vue-notifications'
 export default {
   name: 'CreateUser',
   layout: 'default',
+  middleware: 'admin',
   head() {
     return {
       title: 'Create new user'

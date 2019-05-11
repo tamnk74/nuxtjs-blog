@@ -47,7 +47,7 @@
         </div>
         <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right">
-          <li v-if="authenticated" class="dropdown">
+          <li v-if="user.role === 'ADMIN'" class="dropdown">
             <a
               class="dropdown-toggle"
               id="navbarDropdownMenuAdminLink"

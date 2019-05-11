@@ -5,6 +5,7 @@ import VueNotifications from 'vue-notifications'
 import ImageInput from '@/components/ImageInput'
 
 export default {
+  middleware: 'admin',
   data() {
     return {
       title: '',

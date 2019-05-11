@@ -43,8 +43,8 @@
   </div>
 </template>
 
-<script  src="@/business/profile/IndexBusiness.js"></script>
+<script  src="@/business/admin/users/DetailBusiness.js"></script>
 
 <style lang="scss" >
-@import "./assets/scss/profile";
+@import "./assets/scss/users";
 </style>

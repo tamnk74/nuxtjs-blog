@@ -1,10 +1,9 @@
 import constants from "@/constants";
 import {mapState} from 'vuex';
+import moment from 'moment';
 
 export default {
-  async asyncData ({ store }) {
-    await store.dispatch('users/getUserList');
-  },
+  middleware: 'admin',
   data() {
     return {
     }
@@ -15,11 +14,14 @@ export default {
     })
   },
   created() {
-    // this.initPage();
+    this.init();
   },
   methods: {
-    async initPage () {
-      await this.$store.dispatch('users/getUserList');
+    init () {
+      this.$store.dispatch('users/getUserList');
+    },
+    formatDate (datetime, format = 'DD-MMM-YYYY') {
+      return moment(datetime).format(format);
     },
     getAvatarFullPath (user) {
       return process.env.baseUrl.concat(constants.path.USER_AVATAR + '/' + user.avatar);

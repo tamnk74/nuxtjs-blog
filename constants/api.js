@@ -11,4 +11,5 @@ export default {
   REQUEST_REGISTER: 'auth/register',
   REQUEST_GET_AUTH: 'auth/userInfo',
   UPDATE_PROFILE: 'profile/update',
+  CHECK_EXIST_USER_MAIL: 'common/is-exist-email'
 };

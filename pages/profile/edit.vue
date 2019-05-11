@@ -1,12 +1,13 @@
 <template>
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="well well-sm">
+    <div class="panel panel-success">
+      <div class="panel-heading">Profile</div>
+      <!-- Panel body -->
+      <div class="panel-body">
           <div class="row">
             <div class="col-sm-6 col-md-4">
-              <div class="form-group"  v-if="user">
-                <label for="avatar">Avatar</label>
+              <div class="form-group">
+                <label for="avatar">Change your avatar</label>
                 <image-input v-model="user.avatar" name="avatar">
                   <div slot="activator">
                     <div v-if="!user.avatar" class="pick-thumbnail">
@@ -18,7 +19,6 @@
                   </div>
                 </image-input>
               </div>
-              <img v-else src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
             </div>
             <div v-if="user" class="col-sm-6 col-md-8">
               <div class="form-group">
@@ -114,7 +114,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script  src="@/business/profile/EditBusiness.js"></script>
