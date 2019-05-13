@@ -1,17 +1,12 @@
 import markdown from 'markdown';
-import constant from '@/constants';
-import {get, post} from '@/plugins/api';
-import {mapState, mapGetters} from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
+  name: 'admin-posts',
+  layout: 'default',
   middleware: 'admin',
-  data() {
-    return {
-    }
-  },
   computed: {
     ...mapState({
-      // TODO: Replace booking code with data from 340 screen
       posts: state => state.posts.posts
     })
   },

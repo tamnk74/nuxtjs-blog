@@ -1,11 +1,13 @@
-import { mapState, mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import axios from 'axios';
 import constants from "@/constants";
 import VueNotifications from 'vue-notifications';
 import ImageInput from '@/components/ImageInput.vue';
 
 export default {
+  name: 'admin-categories-edit',
   middleware: 'admin',
+  layout: 'default',
   data() {
     return {
     }

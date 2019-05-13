@@ -1,15 +1,17 @@
 import { mapState, mapGetters } from 'vuex';
-import axios from 'axios'
+import axios from 'axios';
 import constants from "@/constants";
-import VueNotifications from 'vue-notifications'
-import ImageInput from '@/components/ImageInput'
+import VueNotifications from 'vue-notifications';
+import ImageInput from '@/components/ImageInput';
 
 export default {
+  name: 'admin-categories-create',
   middleware: 'admin',
+  layout: 'default',
   data() {
     return {
       title: '',
-      image: null
+      image: null,
     }
   },
   components: {
@@ -19,8 +21,6 @@ export default {
     ...mapState({
       categories: state => state.categories.categories
     })
-  },
-  created() {
   },
   methods: {
     onSubmit() {
@@ -39,16 +39,16 @@ export default {
             method: 'POST',
             url: process.env.baseUrl.concat('/api/' + constants.api.STD_CATEGORY),
             data: formData
-          }).then(response => {
-            VueNotifications.success({
-              title: response.status + ' ' + response.statusText,
-              message: 'Successfully !'
-            });
-            this.$router.push({ name: 'categories'});
           })
+            .then(response => {
+              VueNotifications.success({
+                title: response.status + ' ' + response.statusText,
+                message: 'Successfully !'
+              });
+              this.$router.push({ name: 'admin-categories' });
+            })
             .catch(error => {
               this.$store.commit("notifyError", error, { root: true });
-              console.error(error);
             })
         }
       }).catch(e => {

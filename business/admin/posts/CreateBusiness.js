@@ -4,7 +4,7 @@ import { CoolSelect } from 'vue-cool-select';
 import MarkdownEditor from '@/components/MarkdownEditor.vue';
 
 export default {
-  name: 'CreatePost',
+  name: 'admin-posts-create',
   layout: 'default',
   middleware: 'admin',
   head() {
@@ -23,8 +23,6 @@ export default {
   },
   data() {
     return {
-      error: false,
-      is_submit: false,
       title: '',
       content: '',
       categoryId: null
@@ -43,15 +41,12 @@ export default {
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
-          this.$nuxt.$loading.start();
           // Get user input
           let post = {
             title: this.title,
             content: this.content,
             categoryId: this.categoryId
           };
-          this.error = false;
-          this.is_submit = true;
           this.$store.dispatch('posts/createPost', post);
           this.$router.push({name: 'posts'});
         }

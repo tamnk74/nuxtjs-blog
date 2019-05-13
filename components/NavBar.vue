@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-default navbar-static-top">
+  <nav class="navbar navbar-default navbar-static-top gradient">
     <div class="container">
       <div class="navbar-header">
         <!-- Collapsed Hamburger -->
@@ -151,11 +151,14 @@ export default {
 };
 </script>
 <style scoped>
+.gradient{
+  background: linear-gradient(to bottom, #fff, #93c3d1);
+}
 .navbar-collapse {
   margin-bottom: 0px;
 }
 .nuxt-link-exact-active{
-  border-bottom: 2px solid #1bb3ba61;
+  border-bottom: 2px solid #1709e4bd;
 }
 .avatar-area {
     padding-top: 0px;

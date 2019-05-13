@@ -1,10 +1,10 @@
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import constants from '@/constants';
 import { CoolSelect } from 'vue-cool-select'
 import MarkdownEditor from '@/components/MarkdownEditor.vue';
 
 export default {
-  name: 'AdminEditPost',
+  name: 'admin-posts-edit',
   layout: 'default',
   middleware: 'admin',
   validate ({ params }) {
@@ -31,15 +31,11 @@ export default {
       return postFilter && postFilter[0] || {};
     }
   },
-  data() {
-    return {
-    }
-  },
-  created() {
-    this.initPage();
+  created () {
+    this.init();
   },
   methods: {
-    initPage () {
+    init () {
       this.$store.dispatch('posts/getPostList');
       this.$store.dispatch('categories/getCategoryList');
     },
@@ -49,8 +45,6 @@ export default {
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
-          this.$nuxt.$loading.start();
-          // Get user input
           this.$store.dispatch('posts/updatePost', {
             id: this.post.id,
             title: this.post.title,

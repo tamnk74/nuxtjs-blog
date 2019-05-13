@@ -3,8 +3,8 @@ import constants from "@/constants";
 
 export default {
   name: 'admin-categories',
-  layout: 'default',
   middleware: 'admin',
+  layout: 'default',
   head() {
     return {
       title: 'All categories'
