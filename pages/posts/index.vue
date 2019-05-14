@@ -10,24 +10,10 @@
             <nuxt-link :to="{name: 'posts-id', params: {id: post.id}}">{{ post.title }}</nuxt-link>
           </h2>
           <ul class="list-inline">
-            <li>
-              <i class="fa fa-user"></i> By:
-              <a href="#">{{ post.user && (post.user.fullName) }}</a>
-            </li>
-            <li>
-              |
-              <i class="fa fa-calendar"></i>
-              {{ formatDate(post.createdAt) }} |
-            </li>
-            <li>
-              |
-              <i class="fa fa-comments"></i>
-              <a href="#">{{ post.view }} viewer</a> |
-            </li>
-            <li v-if="post.category">
-              | Categories:
-              <span class="label label-primary">{{ post.category.title }}</span>
-            </li>
+            <li><i class="fa fa-user"></i> By:<a href="#">{{ post.user && (post.user.fullName) }}</a></li>
+            <li>|<i class="fa fa-calendar"></i>{{ formatDate(post.createdAt) }} |</li>
+            <li>|<i class="fa fa-comments"></i><a href="#">{{ post.view }} viewer</a>|</li>
+            <li v-if="post.category">|Categories:<span class="label label-primary">{{ post.category.title }}</span></li>
           </ul>
           <div>{{ shortContent(post) }}</div>
         </div>

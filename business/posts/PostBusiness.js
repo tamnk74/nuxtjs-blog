@@ -1,17 +1,10 @@
 import markdown from 'markdown';
 import moment from 'moment';
-import constant from '@/constants';
-import {get, post} from '@/plugins/api';
-import {mapState, mapGetters} from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
-  data() {
-    return {
-    }
-  },
   computed: {
     ...mapState({
-      // TODO: Replace booking code with data from 340 screen
       posts: state => state.posts.posts,
       key: state => state.key || '',
     }),

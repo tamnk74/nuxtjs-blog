@@ -2,7 +2,7 @@ import { mapState } from 'vuex';
 import constants from "@/constants";
 
 export default {
-  name: 'Categories',
+  name: 'categories',
   layout: 'default',
   head() {
     return {

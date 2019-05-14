@@ -1,4 +1,4 @@
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import constants from '@/constants';
 import { CoolSelect } from 'vue-cool-select'
 
@@ -15,17 +15,9 @@ export default {
   },
   computed: {
     ...mapState({
-      categories: state => state.categories.categories
+      categories: state => state.categories.categories,
+      post: state => state.posts.post,
     })
-  },
-  data() {
-    return {
-      error: false,
-      is_submit: false,
-      title: '',
-      content: '',
-      categoryId: null
-    }
   },
   created() {
     this.initPage();
@@ -41,15 +33,7 @@ export default {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
           this.$nuxt.$loading.start();
-          // Get user input
-          let post = {
-            title: this.title,
-            content: this.content,
-            categoryId: this.categoryId
-          };
-          this.error = false;
-          this.is_submit = true;
-          this.$store.dispatch('posts/createPost', post);
+          this.$store.dispatch('posts/createPost', this.post);
           this.$router.push({name: 'posts'});
         }
       }).catch(() => {

@@ -11,20 +11,20 @@
               name="title"
               class="form-control"
               v-validate="'required'"
-              v-model="title"
+              v-model="category.title"
             >
             <div v-if="errors.has('title')" class="invalid-feedback">{{ errors.first('title') }}</div>
           </div>
 
           <div class="form-group">
             <label for="image">Image</label>
-            <image-input v-model="image" name="image" v-validate="'required'">
+            <image-input v-model="category.image" name="image" v-validate="'required'">
               <div slot="activator">
-                <div v-if="!image" class="pick-thumbnail">
+                <div v-if="!category.image" class="pick-thumbnail">
                   <span>Pick a thumbnail</span>
                 </div>
                 <div v-else class="thumbnail">
-                  <img :src="image.url" alt="avatar">
+                  <img :src="category.image.url" alt="avatar">
                 </div>
               </div>
             </image-input>

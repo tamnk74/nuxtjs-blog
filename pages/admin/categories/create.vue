@@ -42,7 +42,7 @@
   </div>
 </template>
 
-<script  src="@/business/categories/CreateBusiness.js"></script>
+<script  src="@/business/admin/categories/CreateBusiness.js"></script>
 
 <style scoped>
 #preview {

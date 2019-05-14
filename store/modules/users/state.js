@@ -1,6 +1,5 @@
 export default {
   users: [],
   pageInfo: {},
-  user: {
-  }
+  user: {}
 }

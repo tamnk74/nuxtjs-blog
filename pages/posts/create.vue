@@ -11,7 +11,7 @@
               name="title"
               class="form-control"
               v-validate="'required'"
-              v-model="title"
+              v-model="this.post.title"
             >
             <div v-if="errors.has('title')" class="invalid-feedback">{{ errors.first('title') }}</div>
           </div>
@@ -22,7 +22,7 @@
               class="form-control"
               name="content"
               v-validate="'required'"
-              v-model="content"
+              v-model="this.post.content"
               rows="10"
               cols="50"
             />
@@ -31,9 +31,9 @@
 
           <div class="form-group">
             <label for="categoryId">Category</label>
-            <cool-select
+            <!-- <cool-select
               name="categoryId"
-              v-model="categoryId"
+              v-model="this.post.content"
               :items="categories"
               item-value="id"
               item-text="title"
@@ -51,7 +51,7 @@
                   </div>
                 </div>
               </template>
-            </cool-select>
+            </cool-select> -->
             <div
               v-if="errors.has('categoryId')"
               class="invalid-feedback"
