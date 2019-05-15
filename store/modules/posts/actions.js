@@ -23,6 +23,43 @@ export const getPostList = ({ commit }, data) => {
   });
 };
 
+export const getMyPostList = ({ commit }, data) => {
+  commit("setLoading", true, { root: true });
+
+  return new Promise((resolve, reject) => {
+    // Post data to API by Axios
+    return get(constants.api.STD_MY_POST).then(result => {
+      commit(types.SET_MY_POST_LIST, result.data);
+      commit("setLoading", false, { root: true });
+      resolve(HTTP_SUCCESS);
+    })
+    .catch(error => {
+      commit("setLoading", false, { root: true });
+      commit("notifyError", error, { root: true });
+      reject(error);
+    });
+  });
+};
+
+export const getPost = ({ commit }, id) => {
+  commit("setLoading", true, { root: true });
+
+  return new Promise((resolve, reject) => {
+    // Post data to API by Axios
+    return get(constants.api.STD_POST + '/' + id).then(result => {
+      commit(types.SET_POST, result.data.data);
+      commit("setLoading", false, { root: true });
+      resolve(HTTP_SUCCESS);
+    })
+    .catch(error => {
+      commit("setLoading", false, { root: true });
+      commit("notifyError", error, { root: true });
+      reject(error);
+    });
+  });
+};
+
+
 export const createPost = ({ commit }, data) => {
   commit("setLoading", true, { root: true });
 
@@ -76,6 +113,8 @@ export const deletePost = ({ commit }, id) => {
 
 export default {
   getPostList,
+  getMyPostList,
+  getPost,
   createPost,
   updatePost,
   deletePost,

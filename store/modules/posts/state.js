@@ -1,5 +1,6 @@
 export default {
   posts: [],
   pageInfo: {},
-  post: {}
+  post: {},
+  myposts: [],
 }

@@ -6,6 +6,10 @@ export default {
     state.posts = data.data;
     state.pageInfo = data.pageInfo;
   },
+  [types.SET_MY_POST_LIST](state, data) {
+    state.myposts = data.data;
+    state.pageInfo = data.pageInfo;
+  },
   [types.SET_POST](state, post) {
     state.post = post;
   },

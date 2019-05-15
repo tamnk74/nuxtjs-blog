@@ -18,14 +18,7 @@
 
           <div class="form-group">
             <label for="password">Content</label>
-            <textarea
-              class="form-control"
-              name="content"
-              v-validate="'required'"
-              v-model="post.content"
-              rows="10"
-              cols="50"
-            />
+            <MarkdownEditor v-model="post.content" name="content"></MarkdownEditor>
             <div v-if="errors.has('content')" class="invalid-feedback">{{ errors.first('content') }}</div>
           </div>
 
@@ -33,7 +26,7 @@
             <label for="categoryId">Category</label>
             <cool-select
               name="categoryId"
-              v-model="post.cotent"
+              v-model="post.categoryId"
               :items="categories"
               item-value="id"
               item-text="title"
@@ -69,7 +62,7 @@
   </div>
 </template>
 
-<script  src="@/business/posts/CreateBusiness.js"></script>
+<script  src="@/business/myposts/EditBusiness.js"></script>
 
 <style lang="scss" >
 </style>

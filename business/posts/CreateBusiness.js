@@ -5,6 +5,7 @@ import { CoolSelect } from 'vue-cool-select'
 export default {
   name: 'CreatePost',
   layout: 'default',
+  middleware: 'authenticated',
   head() {
     return {
       title: 'Create new post'

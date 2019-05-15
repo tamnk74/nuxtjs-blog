@@ -96,7 +96,7 @@
                 <nuxt-link to="/categories/create" class="dropdown-item">New Category</nuxt-link>
               </li>
               <li>
-                <nuxt-link to="/mypost" class="dropdown-item">My post</nuxt-link>
+                <nuxt-link to="/myposts" class="dropdown-item">My post</nuxt-link>
               </li>
               <li>
                 <a class="dropdown-item" href="#" @click="logout">Logout</a>
