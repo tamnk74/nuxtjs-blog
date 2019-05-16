@@ -62,7 +62,7 @@
   </div>
 </template>
 
-<script  src="@/business/admin/posts/CreateBusiness.js"></script>
+<script  src="@/business/myposts/CreateBusiness.js"></script>
 
 <style lang="scss" >
 </style>

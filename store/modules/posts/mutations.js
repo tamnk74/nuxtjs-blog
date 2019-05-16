@@ -19,4 +19,7 @@ export default {
   [types.DELETE_POST](state, id) {
     state.posts = state.posts.filter(post => post.id !== id);
   },
+  [types.DELETE_MY_POST](state, id) {
+    state.myposts = state.myposts.filter(post => post.id !== id);
+  },
 }

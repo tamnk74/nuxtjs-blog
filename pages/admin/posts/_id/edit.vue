@@ -62,7 +62,7 @@
   </div>
 </template>
 
-<script  src="@/business/admin/posts/EditBusiness.js"></script>
+<script  src="@/business/myposts/EditBusiness.js"></script>
 
 <style lang="scss" >
 </style>

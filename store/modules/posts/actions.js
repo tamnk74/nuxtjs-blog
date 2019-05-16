@@ -110,6 +110,21 @@ export const deletePost = ({ commit }, id) => {
   });
 };
 
+export const deleteMyPost = ({ commit }, id) => {
+  commit("setLoading", true, { root: true });
+  return new Promise((resolve, reject) => {
+    return del(constants.api.STD_POST+'/' + id).then(result => {
+      commit(types.DELETE_MY_POST, id);
+      commit("setLoading", false, { root: true });
+      resolve(HTTP_SUCCESS);
+    })
+    .catch(error => {
+      commit("setLoading", false, { root: true });
+      commit("notifyError", error, { root: true });
+      reject(error);
+    });
+  });
+};
 
 export default {
   getPostList,
@@ -118,4 +133,5 @@ export default {
   createPost,
   updatePost,
   deletePost,
+  deleteMyPost,
 }

@@ -29,6 +29,12 @@ export default {
     },
     initPage () {
       this.$store.dispatch('posts/getMyPostList');
+    },
+    deletePost (id) {
+      if (confirm('Are you sure to delete this post')) {
+        this.$store.dispatch('posts/deleteMyPost', id);
+        this.$router.push({name: 'myposts'})
+      }
     }
   }
 }
