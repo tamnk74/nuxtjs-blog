@@ -1,4 +1,4 @@
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 import constants from '@/constants';
 import ImageInput from '@/components/ImageInput'
 import Datepicker from 'vuejs-datepicker';
@@ -25,19 +25,30 @@ export default {
     })
   },
   data() {
-    return {
-    }
+    return {}
   },
   created() {
     this.initPage();
   },
   methods: {
+    /**
+     * Load user
+     */
     initPage() {
       this.$store.dispatch('users/getUser', this.$route.params.id);
     },
-    getAvatarFullPath (user) {
+    /**
+     * Get full avatar path
+     *
+     * @param user
+     * @returns {string}
+     */
+    getAvatarFullPath(user) {
       return process.env.baseUrl.concat(constants.path.USER_AVATAR + '/' + (user.avatar || 'default.png'));
     },
+    /**
+     * Submit form
+     */
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
@@ -57,7 +68,7 @@ export default {
           if (this.user.avatar.file) {
             formData.append('avatar', this.user.avatar.file, this.user.avatar.file.name);
           }
-          
+
           let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
           axios.defaults.headers.common = {
             'Content-Type': 'multipart/form-data',
@@ -72,10 +83,10 @@ export default {
               title: response.status + ' ' + response.statusText,
               message: 'Successfully !'
             });
-            this.$router.push({ name: 'admin-users'});
+            this.$router.push({name: 'admin-users'});
           })
             .catch(error => {
-              this.$store.commit("notifyError", error, { root: true });
+              this.$store.commit("notifyError", error, {root: true});
               console.error(error);
             })
         }

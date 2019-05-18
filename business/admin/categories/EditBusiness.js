@@ -1,4 +1,4 @@
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 import axios from 'axios';
 import constants from "@/constants";
 import VueNotifications from 'vue-notifications';
@@ -9,32 +9,37 @@ export default {
   middleware: 'admin',
   layout: 'default',
   data() {
-    return {
-    }
+    return {}
   },
   components: {
     ImageInput: ImageInput
   },
   computed: {
     ...mapState({
-      categories: state => state.categories.categories
-    }),
-    category: function() {
-      const categoryId = this.$route.params.id;
-      const categoryFilter = this.categories.filter(category => category.id === categoryId);
-      return categoryFilter && categoryFilter[0] || {};
-    }
+      category: state => state.categories.category,
+    })
   },
   created() {
     this.initPage();
   },
   methods: {
+    /**
+     * Load category
+     */
     initPage() {
-      this.$store.dispatch('categories/getCategoryList');
+      this.$store.dispatch('categories/getCategory', this.$route.params.id);
     },
-    getImageFullPath (category) {
+    /**
+     * Get full path for thumbnail
+     * @param category
+     * @returns {string}
+     */
+    getImageFullPath(category) {
       return process.env.baseUrl.concat(constants.path.CATEGORY_THUMBNAILS + '/' + category.image);
     },
+    /**
+     * Submit form
+     */
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
@@ -44,7 +49,7 @@ export default {
           if (this.category.image.file) {
             formData.append('image', this.category.image.file, this.category.image.file.name);
           }
-          
+
           let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
           axios.defaults.headers.common = {
             'Content-Type': 'multipart/form-data',
@@ -59,15 +64,15 @@ export default {
               title: response.status + ' ' + response.statusText,
               message: 'Successfully !'
             });
-            this.$router.push({ name: 'admin-categories'});
+            this.$router.push({name: 'admin-categories'});
           })
             .catch(error => {
-              this.$store.commit("notifyError", error, { root: true });
+              this.$store.commit("notifyError", error, {root: true});
               console.error(error);
             })
         }
       }).catch(e => {
-        return false;
+        console.log(e);
       });
     },
   }

@@ -11,7 +11,8 @@
   border-radius: 0px;
 }
 
-@-webkit-keyframes rotating /* Safari and Chrome */ {
+@-webkit-keyframes rotating /* Safari and Chrome */
+{
   from {
     -webkit-transform: rotate(0deg);
     -o-transform: rotate(0deg);
@@ -23,6 +24,7 @@
     transform: rotate(360deg);
   }
 }
+
 @keyframes rotating {
   from {
     -ms-transform: rotate(0deg);
@@ -39,6 +41,7 @@
     transform: rotate(360deg);
   }
 }
+
 .rotating {
   -webkit-animation: rotating 2s linear infinite;
   -moz-animation: rotating 2s linear infinite;
@@ -53,9 +56,10 @@
   background: #ffffff;
   padding: 0px;
   width: 100%;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
-.panel-body>.overlay, .overlay-wrapper>.overlay, .panel-body>.loading-img, .overlay-wrapper>.loading-img {
+
+.panel-body > .overlay, .overlay-wrapper > .overlay, .panel-body > .loading-img, .overlay-wrapper > .loading-img {
   position: absolute;
   top: 0;
   left: 0;
@@ -65,11 +69,11 @@
 
 .panel-body .overlay, .overlay-wrapper .overlay {
   z-index: 50;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 3px;
 }
 
-.panel-body .overlay>.fa, .overlay-wrapper .overlay>.fa {
+.panel-body .overlay > .fa, .overlay-wrapper .overlay > .fa {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -105,20 +109,24 @@
       text-align: center;
     }
   }
+
   .thumbnail {
     width: 240px;
     height: 200px;
   }
+
   small {
     color: #0ca678;
   }
 }
+
 .pick-thumbnail {
   width: 240px;
   height: 200px;
   text-align: center;
   background-image: url("/images/default.png");
 }
+
 .thumbnail {
   width: 240px;
   height: 200px;

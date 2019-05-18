@@ -15,20 +15,20 @@
         <div class="panel-body">
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="title">Title</label>
+              <label>Title</label>
               <input
                 type="text"
                 name="title"
                 class="form-control"
                 v-validate="'required'"
-                v-model="title"
+                v-model="post.title"
               >
               <div v-if="errors.has('title')" class="invalid-feedback">{{ errors.first('title') }}</div>
             </div>
 
             <div class="form-group">
-              <label for="password">Content</label>
-              <MarkdownEditor v-model="content" name="content"></MarkdownEditor>
+              <label>Content</label>
+              <MarkdownEditor v-model="post.content" name="content"></MarkdownEditor>
               <div
                 v-if="errors.has('content')"
                 class="invalid-feedback"
@@ -36,10 +36,10 @@
             </div>
 
             <div class="form-group">
-              <label for="categoryId">Category</label>
+              <label>Category</label>
               <cool-select
                 name="categoryId"
-                v-model="categoryId"
+                v-model="post.categoryId"
                 :items="categories"
                 item-value="id"
                 item-text="title"
@@ -76,7 +76,7 @@
   </div>
 </template>
 
-<script  src="@/business/myposts/CreateBusiness.js"></script>
+<script  src="@/business/admin/posts/CreateBusiness.js"></script>
 
 <style lang="scss" >
 </style>

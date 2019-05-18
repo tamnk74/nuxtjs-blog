@@ -1,13 +1,13 @@
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 import constants from '@/constants';
-import { CoolSelect } from 'vue-cool-select'
+import {CoolSelect} from 'vue-cool-select'
 import MarkdownEditor from '@/components/MarkdownEditor.vue';
 
 export default {
   name: 'admin-posts-edit',
   layout: 'default',
   middleware: 'authenticated',
-  validate ({ params }) {
+  validate({params}) {
     const v4 = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
     return v4.test(params.id);
   },
@@ -28,34 +28,41 @@ export default {
       post: state => state.posts.post,
     }),
   },
-  created () {
+  created() {
     this.init();
   },
   methods: {
-    init () {
+    /**
+     * Load data
+     */
+    init() {
       this.$store.dispatch('posts/getPostList');
       this.$store.dispatch('posts/getPost', this.$route.params.id);
       this.$store.dispatch('categories/getCategoryList');
     },
-    getImageFullPath (category) {
-      return process.env.baseUrl.concat(constants.path.CATEGORY_THUMBNAILS + '/' +  category.image);
+    /**
+     * Get full thumbnail path
+     *
+     * @param category
+     * @returns {string}
+     */
+    getImageFullPath(category) {
+      return process.env.baseUrl.concat(constants.path.CATEGORY_THUMBNAILS + '/' + category.image);
     },
+    /**
+     * Submit form
+     */
     onSubmit() {
       if (this.post.userId != this.user.id) {
         this.$router.push({name: 'myposts'});
       }
       this.$validator.validateAll().then((valid) => {
         if (valid) {
-          this.$store.dispatch('posts/updatePost', {
-            id: this.post.id,
-            title: this.post.title,
-            content: this.post.content,
-            categoryId: this.post.categoryId
-          });
+          this.$store.dispatch('posts/updatePost', this.post);
           this.$router.push({name: 'myposts'});
         }
-      }).catch(() => {
-        return false;
+      }).catch(e => {
+        console.log(e);
       });
     },
   }

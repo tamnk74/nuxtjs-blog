@@ -1,4 +1,4 @@
-import { mapActions, mapState } from 'vuex';
+import {mapActions, mapState} from 'vuex';
 
 export default {
   name: 'login',
@@ -32,7 +32,7 @@ export default {
      *
      * @return {Boolean}
      */
-    isValidEmail (email) {
+    isValidEmail(email) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
     },
@@ -42,10 +42,10 @@ export default {
      *
      * @returns {Object}
      */
-    getLoginData () {
+    getLoginData() {
       return Object.assign({
         password: this.password,
-      }, this.isValidEmail(this.email) ? { email: this.email } : { name: this.email });
+      }, this.isValidEmail(this.email) ? {email: this.email} : {name: this.email});
     },
 
     /**

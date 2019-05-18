@@ -6,7 +6,7 @@
         <div class="panel-body">
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="title">Title</label>
+              <label>Title</label>
               <input
                 type="text"
                 name="title"
@@ -18,7 +18,7 @@
             </div>
 
             <div class="form-group">
-              <label for="image">Image</label>
+              <label>Image</label>
               <image-input v-model="category.image" name="image" v-validate="'required'">
                 <div slot="activator">
                   <div v-if="!category.image" class="pick-thumbnail">

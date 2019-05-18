@@ -1,4 +1,4 @@
-import { mapState, mapGetters } from 'vuex';
+import {mapState} from 'vuex';
 import axios from 'axios';
 import constants from "@/constants";
 import VueNotifications from 'vue-notifications';
@@ -8,28 +8,41 @@ export default {
   name: 'admin-categories-create',
   middleware: 'admin',
   layout: 'default',
-  data() {
-    return {
-      title: '',
-      image: null,
-    }
-  },
   components: {
     ImageInput: ImageInput
   },
-  computed: {
-    ...mapState({
-      categories: state => state.categories.categories
-    })
+  data() {
+    return {
+      category: {}
+    }
   },
   methods: {
+    /**
+     * Load default image
+     *
+     * @param event
+     */
+    loadDefaultImage(event) {
+      debugger;
+      event.target.src = '123';
+    },
+    /**
+     * Get form data
+     * @returns {FormData}
+     */
+    getFormData() {
+      const formData = new FormData();
+      formData.append('image', this.category.image.file, this.category.image.file.name);
+      formData.append('title', this.category.title);
+      return formData;
+    },
+    /**
+     * Submit form
+     */
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
           console.log('Uploading...');
-          const formData = new FormData();
-          formData.append('image', this.image.file, this.image.file.name);
-          formData.append('title', this.title);
           let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
           axios.defaults.headers.common = {
             'Content-Type': 'multipart/form-data',
@@ -38,17 +51,17 @@ export default {
           return axios({
             method: 'POST',
             url: process.env.baseUrl.concat('/api/' + constants.api.STD_CATEGORY),
-            data: formData
+            data: this.getFormData()
           })
             .then(response => {
               VueNotifications.success({
                 title: response.status + ' ' + response.statusText,
                 message: 'Successfully !'
               });
-              this.$router.push({ name: 'admin-categories' });
+              this.$router.push({name: 'admin-categories'});
             })
             .catch(error => {
-              this.$store.commit("notifyError", error, { root: true });
+              this.$store.commit("notifyError", error, {root: true});
             })
         }
       }).catch(e => {

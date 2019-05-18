@@ -15,7 +15,7 @@
         <div class="panel-body">
           <form class="form-horizontal" role="form">
             <div class="form-group">
-              <label for="title">Title</label>
+              <label>Title</label>
               <input
                 type="text"
                 name="title"
@@ -27,7 +27,7 @@
             </div>
 
             <div class="form-group">
-              <label for="password">Content</label>
+              <label>Content</label>
               <MarkdownEditor v-model="post.content" name="content"></MarkdownEditor>
               <div
                 v-if="errors.has('content')"
@@ -36,7 +36,7 @@
             </div>
 
             <div class="form-group">
-              <label for="categoryId">Category</label>
+              <label>Category</label>
               <cool-select
                 name="categoryId"
                 v-model="post.categoryId"
@@ -76,7 +76,7 @@
   </div>
 </template>
 
-<script  src="@/business/myposts/EditBusiness.js"></script>
+<script  src="@/business/admin/posts/EditBusiness.js"></script>
 
 <style lang="scss" >
 </style>

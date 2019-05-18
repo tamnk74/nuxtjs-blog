@@ -1,6 +1,6 @@
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 import constants from '@/constants';
-import { CoolSelect } from 'vue-cool-select'
+import {CoolSelect} from 'vue-cool-select'
 import MarkdownEditor from '@/components/MarkdownEditor.vue';
 
 export default {
@@ -26,12 +26,24 @@ export default {
     this.initPage();
   },
   methods: {
+    /**
+     * Load data
+     */
     initPage() {
       this.$store.dispatch('categories/getCategoryList');
     },
-    getImageFullPath (category) {
+    /**
+     * Get full thumbnail path
+     *
+     * @param category
+     * @returns {string}
+     */
+    getImageFullPath(category) {
       return process.env.baseUrl.concat(constants.path.CATEGORY_THUMBNAILS + '/' + category.image);
     },
+    /**
+     * Submit form
+     */
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {

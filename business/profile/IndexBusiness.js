@@ -5,28 +5,33 @@ import constants from "@/constants";
 export default {
   name: 'Profile',
   middleware: 'authenticated',
-  async asyncData ({ store }) {
+  async asyncData({store}) {
     await store.dispatch("auth/check");
-  },
-  data () {
-    return {
-    }
-  },
-  created () {
-    console.log('%c Profile created ...', 'color: blue');
   },
   computed: {
     ...mapState({
       authenticated: state => state.auth.authenticated,
       user: state => state.auth.user,
     }),
-    
+
   },
   methods: {
-    formatDate (datetime) {
+    /**
+     * Format date
+     *
+     * @param datetime
+     * @returns {string}
+     */
+    formatDate(datetime) {
       return moment(datetime).format('DD-MMM-YYYY');
     },
-    getAvatarFullPath (user) {
+    /**
+     * Get full avatar path
+     *
+     * @param user
+     * @returns {string}
+     */
+    getAvatarFullPath(user) {
       return process.env.baseUrl.concat(constants.path.USER_AVATAR + '/' + user.avatar);
     },
   }

@@ -1,6 +1,6 @@
 import markdown from 'markdown';
 import moment from 'moment';
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 
 export default {
   name: 'my-posts',
@@ -19,18 +19,38 @@ export default {
     this.initPage();
   },
   methods: {
-    formatDate (datetime) {
+    /**
+     * Format date
+     *
+     * @param datetime
+     * @returns {string}
+     */
+    formatDate(datetime) {
       return moment(datetime).format('DD-MMM-YYYY');
     },
-    shortContent (post) {
+    /**
+     * Get short html text content
+     *
+     * @param post
+     * @returns {string}
+     */
+    shortContent(post) {
       let content = document.createElement("div")
       content.innerHTML = markdown.markdown.toHTML(post.content || '');
       return content.textContent.slice(0, 280);
     },
-    initPage () {
+    /**
+     * Load data
+     */
+    initPage() {
       this.$store.dispatch('posts/getMyPostList');
     },
-    deletePost (id) {
+    /**
+     * Remove post
+     *
+     * @param id
+     */
+    deletePost(id) {
       if (confirm('Are you sure to delete this post')) {
         this.$store.dispatch('posts/deleteMyPost', id);
         this.$router.push({name: 'myposts'})

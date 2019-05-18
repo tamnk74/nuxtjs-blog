@@ -1,5 +1,5 @@
 import * as types from './mutation-types';
-import { debug } from 'util';
+import {debug} from 'util';
 
 export default {
   [types.SET_POST_LIST](state, data) {

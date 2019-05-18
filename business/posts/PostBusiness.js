@@ -1,6 +1,6 @@
 import markdown from 'markdown';
 import moment from 'moment';
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 
 export default {
   name: 'post-list',
@@ -19,7 +19,7 @@ export default {
       loading: state => state.loading,
     }),
     pageTotal() {
-      return Math.ceil(this.totalPost/this.limit);
+      return Math.ceil(this.totalPost / this.limit);
     },
     filteredPosts() {
       return this.posts.filter(post => post.title.match(this.key));
@@ -34,9 +34,19 @@ export default {
     this.initPage();
   },
   methods: {
-    formatDate (datetime) {
+    /**
+     * Format date
+     * @param datetime
+     * @returns {string}
+     */
+    formatDate(datetime) {
       return moment(datetime).format('DD-MMM-YYYY');
     },
+    /**
+     * Load new page
+     *
+     * @param page
+     */
     changePage(page) {
       this.page = page;
       this.$store.dispatch('posts/getPostList', {
@@ -45,12 +55,21 @@ export default {
         limit: this.limit,
       });
     },
-    shortContent (post) {
+    /**
+     * Get short html text content
+     *
+     * @param post
+     * @returns {string}
+     */
+    shortContent(post) {
       let content = document.createElement("div")
       content.innerHTML = markdown.markdown.toHTML(post.content || '');
       return content.textContent.slice(0, 280);
     },
-    initPage () {
+    /**
+     * Load data
+     */
+    initPage() {
       this.$store.dispatch('posts/getPostList', {
         page: this.page,
         key: this.key,

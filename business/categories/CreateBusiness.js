@@ -1,8 +1,8 @@
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 import constants from "@/constants";
 import VueNotifications from 'vue-notifications';
 import ImageInput from '@/components/ImageInput.vue';
-import { post } from "@/plugins/api";
+import {post} from "@/plugins/api";
 
 export default {
   name: 'categories-create',
@@ -16,16 +16,19 @@ export default {
     })
   },
   methods: {
-    getFormData () {
+    /**
+     * GEt form data
+     *
+     * @returns {FormData}
+     */
+    getFormData() {
       const formData = new FormData();
       formData.append('image', this.category.image.file, this.category.image.file.name);
       formData.append('title', this.category.title);
       return formData;
     },
-    /*
-     * Submit form to create category
-     *
-     *  @return {*}
+    /**
+     * Submit form
      */
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
@@ -37,15 +40,15 @@ export default {
                 title: response.status + ' ' + response.statusText,
                 message: 'Successfully !'
               });
-              this.$router.push({ name: 'categories'});
+              this.$router.push({name: 'categories'});
             })
             .catch(error => {
-              this.$store.commit("notifyError", error, { root: true });
+              this.$store.commit("notifyError", error, {root: true});
               console.error(error);
             })
         }
       }).catch(e => {
-        return false;
+        console.log(e);
       });
     },
   }

@@ -5,8 +5,7 @@ import moment from 'moment';
 export default {
   middleware: 'admin',
   data() {
-    return {
-    }
+    return {}
   },
   computed: {
     ...mapState({
@@ -17,16 +16,37 @@ export default {
     this.init();
   },
   methods: {
-    init () {
+    /**
+     * Load data
+     */
+    init() {
       this.$store.dispatch('users/getUserList');
     },
-    formatDate (datetime, format = 'DD-MMM-YYYY') {
+    /**
+     * Format datetime
+     *
+     * @param datetime
+     * @param format
+     * @returns {string}
+     */
+    formatDate(datetime, format = 'DD-MMM-YYYY') {
       return moment(datetime).format(format);
     },
-    getAvatarFullPath (user) {
+    /**
+     * Get full avatar path
+     *
+     * @param user
+     * @returns {string}
+     */
+    getAvatarFullPath(user) {
       return process.env.baseUrl.concat(constants.path.USER_AVATAR + '/' + user.avatar);
     },
-    deleteUser (id) {
+    /**
+     * Remove user
+     *
+     * @param id
+     */
+    deleteUser(id) {
       if (confirm('Are you sure to delete this user')) {
         this.$store.dispatch('users/deleteUser', id);
         this.$router.push({name: 'admin-users'})

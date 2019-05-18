@@ -8,7 +8,7 @@
               <h4>All Posts</h4>
             </div>
             <div class="col-sm-2 text-right">
-              <nuxt-link :to="{ name: 'admin-posts-create'}" class="btn btn-success">Create</nuxt-link>
+              <nuxt-link :to="{ name: 'posts-create'}" class="btn btn-success">Create</nuxt-link>
             </div>
           </div>
         </div>

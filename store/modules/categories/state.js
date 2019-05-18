@@ -1,6 +1,5 @@
 export default {
   categories: [],
   pageInfo: {},
-  category: {
-  }
+  category: {}
 }

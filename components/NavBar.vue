@@ -1,188 +1,201 @@
 <template>
-  <nav class="navbar navbar-default navbar-static-top gradient">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- Collapsed Hamburger -->
-        <button
-          type="button"
-          class="navbar-toggle collapsed"
-          data-toggle="collapse"
-          data-target="#app-navbar-collapse"
-        >
-          <span class="sr-only">Toggle Navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-
-        <!-- Branding Image -->
-        <nuxt-link to="/" class="navbar-brand">Blog</nuxt-link>
-      </div>
-
-      <ul class="collapse navbar-collapse" id="app-navbar-collapse">
-        <!-- Left Side Of Navbar -->
-        <ul class="nav navbar-nav">
-          <li class>
-            <nuxt-link to="/posts" class="nav-link">Posts</nuxt-link>
-          </li>
-          <li class>
-            <nuxt-link to="/categories" class="nav-link">Categories</nuxt-link>
-          </li>
-          <li class>
-            <nuxt-link to="/tags" class="nav-link">Tags</nuxt-link>
-          </li>
-        </ul>
-        <div class="col-sm-3 col-md-3">
-          <form class="navbar-form" role="search" @submit.prevent="onSubmit">
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                v-model="key"
-                @change="changeKey"
-                placeholder="Search"
-              >
-              <div class="input-group-btn">
-                <button class="btn btn-default" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
+    <nav class="navbar navbar-default navbar-static-top gradient">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- Collapsed Hamburger -->
+                <button
+                        type="button"
+                        class="navbar-toggle collapsed"
+                        data-toggle="collapse"
+                        data-target="#app-navbar-collapse"
+                >
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
-              </div>
+
+                <!-- Branding Image -->
+                <nuxt-link to="/" class="navbar-brand">Blog</nuxt-link>
             </div>
-          </form>
+
+            <ul class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    <li class>
+                        <nuxt-link to="/posts" class="nav-link">Posts</nuxt-link>
+                    </li>
+                    <li class>
+                        <nuxt-link to="/categories" class="nav-link">Categories</nuxt-link>
+                    </li>
+                    <li class>
+                        <nuxt-link to="/tags" class="nav-link">Tags</nuxt-link>
+                    </li>
+                </ul>
+                <div class="col-sm-3 col-md-3">
+                    <form class="navbar-form" role="search" @submit.prevent="onSubmit">
+                        <div class="input-group">
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    v-model="key"
+                                    @change="changeKey"
+                                    placeholder="Search"
+                            >
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li v-if="user.role === 'ADMIN'" class="dropdown">
+                        <a
+                                class="dropdown-toggle"
+                                id="navbarDropdownMenuAdminLink"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                        >
+                            Administration
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <nuxt-link to="/admin/posts" class="dropdown-item">All posts</nuxt-link>
+                            </li>
+                            <li>
+                                <nuxt-link to="/admin/categories" class="dropdown-item">All categories</nuxt-link>
+                            </li>
+                            <li>
+                                <nuxt-link to="/admin/users" class="dropdown-item">All users</nuxt-link>
+                            </li>
+                            <li>
+                                <nuxt-link to="/admin/tags" class="dropdown-item">All tags</nuxt-link>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Authentication Links -->
+                    <li v-if="authenticated" class="dropdown">
+                        <a
+                                class="dropdown-toggle avatar-area"
+                                id="navbarDropdownMenuLink"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                        >
+                            <img :src="getAvatarPath(user)" class="avatar-icon">
+                            {{ user.fullName }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <nuxt-link to="/profile" class="dropdown-item">Profile</nuxt-link>
+                            </li>
+                            <li>
+                                <nuxt-link to="/posts/create" class="dropdown-item">New post</nuxt-link>
+                            </li>
+                            <li>
+                                <nuxt-link to="/categories/create" class="dropdown-item">New Category</nuxt-link>
+                            </li>
+                            <li>
+                                <nuxt-link to="/myposts" class="dropdown-item">My post</nuxt-link>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#" @click="logout">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li v-else class="nav-item">
+                        <nuxt-link to="/login" class="nav-link">Login</nuxt-link>
+                    </li>
+                </ul>
+            </ul>
         </div>
-        <!-- Right Side Of Navbar -->
-        <ul class="nav navbar-nav navbar-right">
-          <li v-if="user.role === 'ADMIN'" class="dropdown">
-            <a
-              class="dropdown-toggle"
-              id="navbarDropdownMenuAdminLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Administration
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <nuxt-link to="/admin/posts" class="dropdown-item">All posts</nuxt-link>
-              </li>
-              <li>
-                <nuxt-link to="/admin/categories" class="dropdown-item">All categories</nuxt-link>
-              </li>
-              <li>
-                <nuxt-link to="/admin/users" class="dropdown-item">All users</nuxt-link>
-              </li>
-              <li>
-                <nuxt-link to="/admin/tags" class="dropdown-item">All tags</nuxt-link>
-              </li>
-            </ul>
-          </li>
-          <!-- Authentication Links -->
-          <li v-if="authenticated" class="dropdown">
-            <a
-              class="dropdown-toggle avatar-area"
-              id="navbarDropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <img :src="getAvatarPath(user)" class="avatar-icon">
-              {{ user.fullName }}
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <nuxt-link to="/profile" class="dropdown-item">Profile</nuxt-link>
-              </li>
-              <li>
-                <nuxt-link to="/posts/create" class="dropdown-item">New post</nuxt-link>
-              </li>
-              <li>
-                <nuxt-link to="/categories/create" class="dropdown-item">New Category</nuxt-link>
-              </li>
-              <li>
-                <nuxt-link to="/myposts" class="dropdown-item">My post</nuxt-link>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#" @click="logout">Logout</a>
-              </li>
-            </ul>
-          </li>
-          <li v-else class="nav-item">
-            <nuxt-link to="/login" class="nav-link">Login</nuxt-link>
-          </li>
-        </ul>
-      </ul>
-    </div>
-  </nav>
+    </nav>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from "vuex";
-import constants from "@/constants";
+  import {mapActions, mapGetters, mapState} from "vuex";
+  import constants from "@/constants";
 
-export default {
-  name: "NavbarMenu",
-  data() {
-    return {
-      key: ""
-    };
-  },
-  async asyncData({ params }) {
-    console.log("%c Navbar asyncData ...", "color: blue");
-  },
-  created() {
-    console.log("%c Navbar created ...", "color: blue");
-    if (localStorage.getItem("token")) {
-      this.$store.dispatch("auth/check");
-    }
-  },
-  computed: {
-    ...mapState({
-      authenticated: state => state.auth.authenticated,
-      user: state => {
-        console.log("%c Navbar computed ...", "color: blue");
-        return state.auth.user;
+  export default {
+    name: "NavbarMenu",
+    data() {
+      return {
+        key: ""
+      };
+    },
+    async asyncData({params}) {
+      console.log("%c Navbar asyncData ...", "color: blue");
+    },
+    created() {
+      console.log("%c Navbar created ...", "color: blue");
+      if (localStorage.getItem("token")) {
+        this.$store.dispatch("auth/check");
       }
-    })
-  },
-  methods: {
-    changeKey() {
-      this.$store.commit("setKey", this.key, { root: true });
     },
-    onSubmit() {
-      this.changeKey();
+    computed: {
+      ...mapState({
+        authenticated: state => state.auth.authenticated,
+        user: state => state.auth.user,
+      })
     },
-    getAvatarPath(user) {
-      return process.env.baseUrl.concat(
-        constants.path.USER_AVATAR + "/" + user.avatar
-      );
-    },
-    logout() {
-      this.$store.dispatch("auth/logout");
-      this.$router.push("/");
+    methods: {
+      /**
+       * Change key search
+       */
+      changeKey() {
+        this.$store.commit("setKey", this.key, {root: true});
+      },
+      /**
+       * Change key search
+       */
+      onSubmit() {
+        this.changeKey();
+      },
+      /**
+       * Get avatar path
+       */
+      getAvatarPath(user) {
+        return process.env.baseUrl.concat(
+          constants.path.USER_AVATAR + "/" + user.avatar
+        );
+      },
+      /**
+       * Log out
+       */
+      logout() {
+        this.$store.dispatch("auth/logout");
+        this.$router.push("/");
+      }
     }
-  }
-};
+  };
 </script>
 <style scoped>
-.gradient {
-  background: linear-gradient(to bottom, #fff, #93c3d1);
-}
-.navbar-collapse {
-  margin-bottom: 0px;
-}
-.nuxt-link-exact-active {
-  border-bottom: 2px solid #1709e4bd;
-}
-.avatar-area {
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-.avatar-icon {
-  position: relative;
-  width: 50px;
-  height: 50px;
-}
+    .gradient {
+        background: linear-gradient(to bottom, #fff, #93c3d1);
+    }
+
+    .navbar-collapse {
+        margin-bottom: 0px;
+    }
+
+    .nuxt-link-exact-active {
+        border-bottom: 2px solid #1709e4bd;
+    }
+
+    .avatar-area {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .avatar-icon {
+        position: relative;
+        width: 50px;
+        height: 50px;
+    }
 </style>
