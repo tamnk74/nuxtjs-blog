@@ -1,4 +1,4 @@
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 import constants from '@/constants';
 import ImageInput from '@/components/ImageInput'
 import Datepicker from 'vuejs-datepicker';
@@ -18,27 +18,26 @@ export default {
     ImageInput: ImageInput,
     Datepicker: Datepicker
   },
-  computed: {
-    ...mapState({
-      users: state => state.users.users,
-      user: state => state.users.user,
-    })
-  },
   data() {
     return {
-      error: false,
-      is_submit: false,
-      title: '',
-      content: '',
-      categoryId: null
+      user: {}
     }
   },
   created() {
-    this.initPage();
   },
   methods: {
-    initPage() {
+    /**
+     * Get full avatar path
+     *
+     * @param user
+     * @returns {string}
+     */
+    getAvatarFullPath(user) {
+      return process.env.baseUrl.concat(constants.path.USER_AVATAR + '/' + user.avatar);
     },
+    /**
+     * Submit form
+     */
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
@@ -54,7 +53,7 @@ export default {
           if (this.user.avatar.file) {
             formData.append('avatar', this.user.avatar.file, this.user.avatar.file.name);
           }
-          
+
           let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
           axios.defaults.headers.common = {
             'Content-Type': 'multipart/form-data',
@@ -69,10 +68,10 @@ export default {
               title: response.status + ' ' + response.statusText,
               message: 'Successfully !'
             });
-            this.$router.push({ name: 'admin-users'});
+            this.$router.push({name: 'admin-users'});
           })
             .catch(error => {
-              this.$store.commit("notifyError", error, { root: true });
+              this.$store.commit("notifyError", error, {root: true});
               console.error(error);
             })
         }

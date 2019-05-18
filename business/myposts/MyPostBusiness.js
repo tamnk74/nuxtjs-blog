@@ -3,32 +3,17 @@ import moment from 'moment';
 import {mapState} from 'vuex';
 
 export default {
-  name: 'post-list',
+  name: 'my-posts',
   layout: 'default',
-  data() {
-    return {
-      page: 1,
-      limit: 50,
-    }
-  },
+  middleware: 'authenticated',
   computed: {
     ...mapState({
-      posts: state => state.posts.posts,
-      totalPost: state => state.posts.pageInfo.count,
-      key: state => state.key,
-      loading: state => state.loading,
+      posts: state => state.posts.myposts,
+      key: state => state.key || '',
     }),
-    pageTotal() {
-      return Math.ceil(this.totalPost / this.limit);
-    },
-    filteredPosts() {
+    filteredPosts: () => {
       return this.posts.filter(post => post.title.match(this.key));
     }
-  },
-  watch: {
-    key: function (val) {
-      console.log("Watch key: ", val);
-    },
   },
   created() {
     this.initPage();
@@ -36,24 +21,12 @@ export default {
   methods: {
     /**
      * Format date
+     *
      * @param datetime
      * @returns {string}
      */
     formatDate(datetime) {
       return moment(datetime).format('DD-MMM-YYYY');
-    },
-    /**
-     * Load new page
-     *
-     * @param page
-     */
-    changePage(page) {
-      this.page = page;
-      this.$store.dispatch('posts/getPostList', {
-        page: this.page,
-        key: this.key,
-        limit: this.limit,
-      });
     },
     /**
      * Get short html text content
@@ -70,11 +43,18 @@ export default {
      * Load data
      */
     initPage() {
-      this.$store.dispatch('posts/getPostList', {
-        page: this.page,
-        key: this.key,
-        limit: this.limit,
-      });
+      this.$store.dispatch('posts/getMyPostList');
+    },
+    /**
+     * Remove post
+     *
+     * @param id
+     */
+    deletePost(id) {
+      if (confirm('Are you sure to delete this post')) {
+        this.$store.dispatch('posts/deleteMyPost', id);
+        this.$router.push({name: 'myposts'})
+      }
     }
   }
 }

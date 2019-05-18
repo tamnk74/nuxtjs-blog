@@ -5,77 +5,32 @@ const concatUrl = function (url) {
   return baseUrl.concat(url);
 }
 
+const axiosFactory = function(method = 'GET', url, payload = {}) {
+  let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
+
+  axios.defaults.headers.common = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + token,
+  };
+
+  return axios(Object.assign({
+    method: method,
+    url: concatUrl(url),
+  }, method === 'GET' ? { params: payload }: { data: payload }));
+}
+
 export function get(url, payload = '') {
-  let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
-
-  axios.defaults.headers.common = {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + token,
-  };
-
-  return axios({
-    method: 'GET',
-    url: concatUrl(url),
-    params: payload
-  });
+  return axiosFactory('GET', url, payload);
 }
-
 export function post(url, payload = '') {
-  let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
-
-  axios.defaults.headers.common = {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + token,
-  };
-  return axios({
-    method: 'POST',
-    url: concatUrl(url),
-    data: payload
-  })
+  return axiosFactory('POST', url, payload);
 }
-
-
 export function patch(url, payload = '') {
-  let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
-
-  axios.defaults.headers.common = {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + token,
-  };
-
-  return axios({
-    method: 'PATCH',
-    url: concatUrl(url),
-    data: payload
-  });
+  return axiosFactory('PATCH', url, payload);
 }
-
 export function put(url, payload = '') {
-  let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
-
-  axios.defaults.headers.common = {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + token,
-  };
-
-  return axios({
-    method: 'PUT',
-    url: concatUrl(url),
-    data: payload
-  });
+  return axiosFactory('PUT', url, payload);
 }
-
 export function del(url, payload = '') {
-  let token = !!localStorage.getItem('token') ? localStorage.getItem('token') : '';
-
-  axios.defaults.headers.common = {
-    'Content-Type': 'application/json',
-    Authorization: 'Bearer ' + token,
-  };
-
-  return axios({
-    method: 'DELETE',
-    url: concatUrl(url),
-    data: payload
-  });
+  return axiosFactory('DELETE', url, payload);
 }

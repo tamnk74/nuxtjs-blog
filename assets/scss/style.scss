@@ -1,5 +1,5 @@
-@import 'var';
-@import 'mixins';
+@import "var";
+@import "mixins";
 
 .main-content {
   h2 {
@@ -7,11 +7,95 @@
   }
 }
 
+.form-control {
+  border-radius: 0px;
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */
+{
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.rotating {
+  -webkit-animation: rotating 2s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
+}
+
+.panel-body {
+  position: relative;
+  border-radius: 3px;
+  background: #ffffff;
+  padding: 0px;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.panel-body > .overlay, .overlay-wrapper > .overlay, .panel-body > .loading-img, .overlay-wrapper > .loading-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.panel-body .overlay, .overlay-wrapper .overlay {
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 3px;
+}
+
+.panel-body .overlay > .fa, .overlay-wrapper .overlay > .fa {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -15px;
+  margin-top: -15px;
+  color: #000;
+  font-size: 30px;
+}
+
+.list-group {
+  margin-bottom: 0;
+}
+
 .invalid-feedback {
   width: 100%;
   margin-top: 0.25rem;
   font-size: 95%;
   color: #dc3545;
+}
+
+.form-group {
+  margin: 0 !important;
 }
 
 .list-kanban {
@@ -25,20 +109,24 @@
       text-align: center;
     }
   }
+
   .thumbnail {
     width: 240px;
     height: 200px;
   }
+
   small {
     color: #0ca678;
   }
 }
+
 .pick-thumbnail {
   width: 240px;
   height: 200px;
   text-align: center;
   background-image: url("/images/default.png");
 }
+
 .thumbnail {
   width: 240px;
   height: 200px;

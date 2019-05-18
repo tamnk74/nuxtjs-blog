@@ -16,8 +16,8 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css' },
-      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.8.1/css/all.css' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' },
+      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.8.2/css/all.css' },
     ],
     script: [
       { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js' },
@@ -42,7 +42,8 @@ export default {
   plugins: [
     { src: "~/plugins/vee-validate.js", ssr: false },
     { src: "~/plugins/vue-notifications", ssr: false },
-    { src: "~/plugins/vue-cool-select", ssr: false }
+    { src: "~/plugins/vue-cool-select", ssr: false },
+    { src: "~/plugins/vue-components", ssr: false }
   ],
 
   /*

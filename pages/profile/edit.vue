@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col-sm-6 col-md-4">
               <div class="form-group">
-                <label for="avatar">Change your avatar</label>
+                <label>Change your avatar</label>
                 <image-input v-model="user.avatar" name="avatar">
                   <div slot="activator">
                     <div v-if="!user.avatar" class="pick-thumbnail">
@@ -22,7 +22,7 @@
             </div>
             <div v-if="user" class="col-sm-6 col-md-8">
               <div class="form-group">
-                <label for="fullName">Full Name</label>
+                <label>Full Name</label>
                 <input
                   type="text"
                   name="fullName"
@@ -36,7 +36,7 @@
                 >{{ errors.first('fullName') }}</div>
               </div>
               <div class="form-group">
-                <label for="address">Address</label>
+                <label>Address</label>
                 <input
                   type="text"
                   name="address"
@@ -49,7 +49,7 @@
                 >{{ errors.first('address') }}</div>
               </div>
               <div class="form-group">
-                <label for="email">Email</label>
+                <label>Email</label>
                 <input
                   type="text"
                   name="email"
@@ -60,7 +60,7 @@
                 <div v-if="errors.has('email')" class="invalid-feedback">{{ errors.first('email') }}</div>
               </div>
               <div class="form-group">
-                <label for="birthday">Birthday</label>
+                <label>Birthday</label>
                 <datepicker
                   v-model="user.birthday"
                   name="birthday"
@@ -73,7 +73,7 @@
                 >{{ errors.first('birthday') }}</div>
               </div>
               <div class="form-group">
-                <label for="oldPassword">Current Password</label>
+                <label>Current Password</label>
                 <input
                   type="password"
                   name="oldPassword"
@@ -83,7 +83,7 @@
                 <div v-if="errors.has('oldPassword')" class="invalid-feedback">{{ errors.first('oldPassword') }}</div>
               </div>
               <div class="form-group">
-                <label for="password">New Password</label>
+                <label>New Password</label>
                 <input
                   type="password"
                   name="password"
@@ -94,7 +94,7 @@
                 <div v-if="errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
               </div>
               <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
+                <label>Confirm Password</label>
                 <input
                   type="password"
                   name="confirmPassword"
@@ -106,8 +106,8 @@
               </div>
             </div>
           </div>
-          <div class="row action">
-            <div>
+          <div class="row" style="margin-top: 20px">
+            <div class="col-sm-12 text-center">
               <button type="button" @click="onSubmit()" class="btn btn-success">Save</button>
             </div>
           </div>

@@ -4,12 +4,16 @@ import {CoolSelect} from 'vue-cool-select'
 import MarkdownEditor from '@/components/MarkdownEditor.vue';
 
 export default {
-  name: 'CreatePost',
+  name: 'admin-posts-edit',
   layout: 'default',
   middleware: 'authenticated',
+  validate({params}) {
+    const v4 = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
+    return v4.test(params.id);
+  },
   head() {
     return {
-      title: 'Create new post'
+      title: 'Edit post'
     }
   },
   components: {
@@ -19,17 +23,21 @@ export default {
   computed: {
     ...mapState({
       categories: state => state.categories.categories,
+      posts: state => state.posts.posts,
+      user: state => state.auth.user,
       post: state => state.posts.post,
-    })
+    }),
   },
   created() {
-    this.initPage();
+    this.init();
   },
   methods: {
     /**
      * Load data
      */
-    initPage() {
+    init() {
+      this.$store.dispatch('posts/getPostList');
+      this.$store.dispatch('posts/getPost', this.$route.params.id);
       this.$store.dispatch('categories/getCategoryList');
     },
     /**
@@ -45,14 +53,16 @@ export default {
      * Submit form
      */
     onSubmit() {
+      if (this.post.userId != this.user.id) {
+        this.$router.push({name: 'myposts'});
+      }
       this.$validator.validateAll().then((valid) => {
         if (valid) {
-          this.$nuxt.$loading.start();
-          this.$store.dispatch('posts/createPost', this.post);
-          this.$router.push({name: 'posts'});
+          this.$store.dispatch('posts/updatePost', this.post);
+          this.$router.push({name: 'myposts'});
         }
-      }).catch(() => {
-        return false;
+      }).catch(e => {
+        console.log(e);
       });
     },
   }

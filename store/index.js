@@ -21,12 +21,16 @@ const createStore = () => {
 		// #root state
 		state: () => ({
 			loading: false,
+			key: '',
 			authentication: null
 		}),
 		// #root mutations
 		mutations: {
 			setLoading(state, loading) {
 				state.loading = loading;
+			},
+			setKey(state, key) {
+				state.key = key;
 			},
 			notifyError(state, error) {
 				console.log('ERROR: ', error);

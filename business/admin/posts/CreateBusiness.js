@@ -1,10 +1,10 @@
-import { mapActions, mapState } from 'vuex';
+import {mapState} from 'vuex';
 import constants from '@/constants';
-import { CoolSelect } from 'vue-cool-select';
+import {CoolSelect} from 'vue-cool-select';
 import MarkdownEditor from '@/components/MarkdownEditor.vue';
 
 export default {
-  name: 'CreatePost',
+  name: 'admin-posts-create',
   layout: 'default',
   middleware: 'admin',
   head() {
@@ -23,37 +23,36 @@ export default {
   },
   data() {
     return {
-      error: false,
-      is_submit: false,
-      title: '',
-      content: '',
-      categoryId: null
+      post: {},
     }
   },
   created() {
     this.initPage();
   },
   methods: {
+    /**
+     * Load category list
+     */
     initPage() {
       this.$store.dispatch('categories/getCategoryList');
     },
-    getImageFullPath (category) {
+    /**
+     * Get full path thumbnail of category
+     *
+     * @param category
+     * @returns {string}
+     */
+    getImageFullPath(category) {
       return process.env.baseUrl.concat(constants.path.CATEGORY_THUMBNAILS + '/' + category.image);
     },
+    /**
+     * Submit form
+     */
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {
-          this.$nuxt.$loading.start();
-          // Get user input
-          let post = {
-            title: this.title,
-            content: this.content,
-            categoryId: this.categoryId
-          };
-          this.error = false;
-          this.is_submit = true;
-          this.$store.dispatch('posts/createPost', post);
-          this.$router.push({name: 'posts'});
+          this.$store.dispatch('posts/createPost', this.post);
+          this.$router.push({name: 'admin-posts'});
         }
       }).catch(() => {
         return false;

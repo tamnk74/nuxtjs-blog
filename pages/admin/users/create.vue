@@ -1,11 +1,21 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="well well-sm">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-sm-10">
+              <h4>Add User</h4>
+            </div>
+            <div class="col-sm-2 text-right">
+              <nuxt-link :to="{ name: 'admin-users'}" class="btn btn-default">Cancel</nuxt-link>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body">
           <div class="row">
             <div class="col-sm-6 col-md-4">
-              <div class="form-group"  v-if="user">
+              <div class="form-group" v-if="user">
                 <label for="avatar">Avatar</label>
                 <image-input v-model="user.avatar" name="avatar">
                   <div slot="activator">
@@ -18,7 +28,7 @@
                   </div>
                 </image-input>
               </div>
-              <img v-else src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+              <img v-else src="http://placehold.it/380x500" alt class="img-rounded img-responsive">
             </div>
             <div v-if="user" class="col-sm-6 col-md-8">
               <div class="form-group">
@@ -30,10 +40,7 @@
                   v-validate="'required'"
                   v-model="user.name"
                 >
-                <div
-                  v-if="errors.has('name')"
-                  class="invalid-feedback"
-                >{{ errors.first('name') }}</div>
+                <div v-if="errors.has('name')" class="invalid-feedback">{{ errors.first('name') }}</div>
               </div>
               <div class="form-group">
                 <label for="fullName">Full Name</label>
@@ -52,12 +59,7 @@
               </div>
               <div class="form-group">
                 <label for="address">Address</label>
-                <input
-                  type="text"
-                  name="address"
-                  class="form-control"
-                  v-model="user.address"
-                >
+                <input type="text" name="address" class="form-control" v-model="user.address">
                 <div
                   v-if="errors.has('address')"
                   class="invalid-feedback"
@@ -96,8 +98,8 @@
                   v-validate="'required'"
                   v-model="user.role"
                 >
-                <option value="USER" selected="selected">User</option>
-                <option value="ADMIN">Admin</option>
+                  <option value="USER" selected="selected">User</option>
+                  <option value="ADMIN">Admin</option>
                 </select>
                 <div v-if="errors.has('role')" class="invalid-feedback">{{ errors.first('role') }}</div>
               </div>
@@ -110,7 +112,10 @@
                   v-validate="'required|min:6|confirmed:confirmation'"
                   v-model="user.password"
                 >
-                <div v-if="errors.has('password')" class="invalid-feedback">{{ errors.first('password') }}</div>
+                <div
+                  v-if="errors.has('password')"
+                  class="invalid-feedback"
+                >{{ errors.first('password') }}</div>
               </div>
               <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
@@ -121,12 +126,15 @@
                   ref="confirmation"
                   v-model="user.confirmPassword"
                 >
-                <div v-if="errors.has('confirmPassword')" class="invalid-feedback">{{ errors.first('confirmPassword') }}</div>
+                <div
+                  v-if="errors.has('confirmPassword')"
+                  class="invalid-feedback"
+                >{{ errors.first('confirmPassword') }}</div>
               </div>
             </div>
           </div>
-          <div class="row action">
-            <div>
+          <div class="row" style="margin-top: 20px">
+            <div class="col-sm-12 text-center">
               <button type="button" @click="onSubmit()" class="btn btn-success">Save</button>
             </div>
           </div>
