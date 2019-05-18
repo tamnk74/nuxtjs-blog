@@ -33,12 +33,17 @@
           </li>
         </ul>
         <div class="col-sm-3 col-md-3">
-          <form class="navbar-form" role="search">
+          <form class="navbar-form" role="search" @submit.prevent="onSubmit">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search" name="q" value>
+              <input
+                type="text"
+                class="form-control"
+                v-model="key"
+                @change="changeKey"
+                placeholder="Search"
+              >
               <div class="input-group-btn">
                 <button class="btn btn-default" type="submit">
-                  <!-- <i class="glyphicon glyphicon-search"></i> -->
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
               </div>
@@ -82,7 +87,8 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img :src="getAvatarPath(user)" class="avatar-icon"/> {{ user.fullName }}
+              <img :src="getAvatarPath(user)" class="avatar-icon">
+              {{ user.fullName }}
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
@@ -119,13 +125,15 @@ import constants from "@/constants";
 export default {
   name: "NavbarMenu",
   data() {
-    return {};
+    return {
+      key: ""
+    };
   },
-  async asyncData ({ params }) {
-    console.log('%c Navbar asyncData ...', 'color: blue');
+  async asyncData({ params }) {
+    console.log("%c Navbar asyncData ...", "color: blue");
   },
   created() {
-    console.log('%c Navbar created ...', 'color: blue');
+    console.log("%c Navbar created ...", "color: blue");
     if (localStorage.getItem("token")) {
       this.$store.dispatch("auth/check");
     }
@@ -134,35 +142,43 @@ export default {
     ...mapState({
       authenticated: state => state.auth.authenticated,
       user: state => {
-        console.log('%c Navbar computed ...', 'color: blue');
+        console.log("%c Navbar computed ...", "color: blue");
         return state.auth.user;
       }
     })
   },
   methods: {
-    getAvatarPath (user) {
-      return process.env.baseUrl.concat(constants.path.USER_AVATAR + '/' + user.avatar);
+    changeKey() {
+      this.$store.commit("setKey", this.key, { root: true });
+    },
+    onSubmit() {
+      this.changeKey();
+    },
+    getAvatarPath(user) {
+      return process.env.baseUrl.concat(
+        constants.path.USER_AVATAR + "/" + user.avatar
+      );
     },
     logout() {
       this.$store.dispatch("auth/logout");
-      this.$router.push('/');
+      this.$router.push("/");
     }
   }
 };
 </script>
 <style scoped>
-.gradient{
+.gradient {
   background: linear-gradient(to bottom, #fff, #93c3d1);
 }
 .navbar-collapse {
   margin-bottom: 0px;
 }
-.nuxt-link-exact-active{
+.nuxt-link-exact-active {
   border-bottom: 2px solid #1709e4bd;
 }
 .avatar-area {
-    padding-top: 0px;
-    padding-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .avatar-icon {
   position: relative;

@@ -1,6 +1,6 @@
 <template>
   <div :class="className">
-    <div><button type="button" @click="switchMode()">{{ mode }}</button></div>
+    <div><button type="button" @click="switchMode()" class="btn btn-default">{{ mode }}</button></div>
     <div>
       <textarea
         v-if="mode === 'editor'"
@@ -8,7 +8,7 @@
         @change="onChange($event.target)"
         :class="classInput"
         :value="value"
-        rows="30"
+        rows="10"
       />
       <div v-else class="preview" v-html="previewHTML"></div>
     </div>
@@ -60,7 +60,7 @@ export default {
 .preview {
   width: 100%;
   height: 100%;
-  min-height: 200px;
+  min-height: 210px;
 }
 .editor {
   width: 100%;

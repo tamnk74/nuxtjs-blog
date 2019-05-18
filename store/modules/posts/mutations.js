@@ -13,6 +13,9 @@ export default {
   [types.SET_POST](state, post) {
     state.post = post;
   },
+  [types.SET_CATEGORY](state, category) {
+    state.category = category;
+  },
   [types.UPDATE_POST](state, data) {
     state.posts = [...state.posts.filter(post => post !== data.id), data];
   },

@@ -10,8 +10,30 @@ export const getPostList = ({ commit }, data) => {
 
   return new Promise((resolve, reject) => {
     // Post data to API by Axios
-    return get(constants.api.GET_POST_LIST).then(result => {
+    return get(constants.api.GET_POST_LIST, data).then(result => {
       commit(types.SET_POST_LIST, result.data);
+      commit("setLoading", false, { root: true });
+      resolve(HTTP_SUCCESS);
+    })
+    .catch(error => {
+      commit("setLoading", false, { root: true });
+      commit("notifyError", error, { root: true });
+      reject(error);
+    });
+  });
+};
+//This is login function
+export const getPostListByCategory = ({ commit }, id, data) => {
+  commit("setLoading", true, { root: true });
+
+  return new Promise((resolve, reject) => {
+    // Post data to API by Axios
+    return get(constants.api.STD_CATEGORY + '/' + id, data).then(result => {
+      commit(types.SET_POST_LIST, {
+        data: result.data.data.posts,
+        pageInfo: result.data.pageInfo
+      });
+      commit(types.SET_CATEGORY, result.data.data.category);
       commit("setLoading", false, { root: true });
       resolve(HTTP_SUCCESS);
     })
@@ -28,7 +50,7 @@ export const getMyPostList = ({ commit }, data) => {
 
   return new Promise((resolve, reject) => {
     // Post data to API by Axios
-    return get(constants.api.STD_MY_POST).then(result => {
+    return get(constants.api.STD_MY_POST, data).then(result => {
       commit(types.SET_MY_POST_LIST, result.data);
       commit("setLoading", false, { root: true });
       resolve(HTTP_SUCCESS);
@@ -129,6 +151,7 @@ export const deleteMyPost = ({ commit }, id) => {
 export default {
   getPostList,
   getMyPostList,
+  getPostListByCategory,
   getPost,
   createPost,
   updatePost,

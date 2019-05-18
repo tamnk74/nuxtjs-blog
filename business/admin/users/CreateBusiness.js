@@ -39,6 +39,9 @@ export default {
   methods: {
     initPage() {
     },
+    getAvatarFullPath (user) {
+      return process.env.baseUrl.concat(constants.path.USER_AVATAR + '/' + user.avatar);
+    },
     onSubmit() {
       this.$validator.validateAll().then((valid) => {
         if (valid) {

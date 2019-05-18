@@ -1,8 +1,9 @@
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'login',
   layout: 'default',
+  middleware: "notAuthenticated",
   head() {
     return {
       title: 'Login to system'
@@ -13,6 +14,11 @@ export default {
       email: '',
       password: '',
     }
+  },
+  computed: {
+    ...mapState({
+      loading: state => state.loading,
+    })
   },
   methods: {
     ...mapActions('auth', [

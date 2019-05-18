@@ -1,6 +1,7 @@
 import { mapState } from 'vuex';
 import constants from '@/constants';
 import { CoolSelect } from 'vue-cool-select'
+import MarkdownEditor from '@/components/MarkdownEditor.vue';
 
 export default {
   name: 'CreatePost',
@@ -12,7 +13,8 @@ export default {
     }
   },
   components: {
-    CoolSelect: CoolSelect
+    CoolSelect: CoolSelect,
+    MarkdownEditor: MarkdownEditor,
   },
   computed: {
     ...mapState({

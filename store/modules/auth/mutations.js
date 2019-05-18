@@ -4,10 +4,8 @@ import axios from 'axios';
 export default {
   [types.CHECK](state) {
     // Check user is login
-    state.authenticated = !! window.localStorage.getItem('token');
-    const jsonUser = window.localStorage.getItem('user');
-    state.user = jsonUser && JSON.parse(jsonUser);
-    const token =  window.localStorage.getItem("token");
+    state.authenticated = !! localStorage.getItem('token');
+    const token =  localStorage.getItem("token");
     axios.defaults.headers.common['Authorization'] = null;
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
   },
